@@ -18,5 +18,7 @@ namespace Tam.Domain.Entities
         public bool IsActive { get; set; } = true;
 
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+        public ICollection<Invoice>? Invoices { get; set; }
+
     }
 }

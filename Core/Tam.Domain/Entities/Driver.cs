@@ -3,19 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class Driver
+    public class Driver : BaseEntity
     {
-        public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public int SupplierId { get; set; }
+        public int? SupplierId { get; set; }
+        public Supplier? Supplier { get; set; }
         public string LicenseNumber { get; set; } = string.Empty;
         public DateTime? LicenseExpiryDate { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+  
         public ICollection<DriverLocation> DriverLocations { get; set; }
+        public ICollection<DriverTransfer>? DriverTransfers { get; set; }
+
 
 
     }

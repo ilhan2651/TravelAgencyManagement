@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class PaymentMethod
+    public class PaymentMethod : BaseEntity
     {
-        public int Id { get; set; }
         public string Method { get; set; } = string.Empty;
 
     }

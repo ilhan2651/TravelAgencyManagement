@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class ReportRequest
+    public class ReportRequest : BaseEntity
     {
-        public int Id { get; set; }
 
         public int RequestedByUserId { get; set; }
+        public User RequestedByUser { get; set; }
+
         public string ReportType { get; set; } = string.Empty;
 
         public DateTime? StartDate { get; set; }
@@ -20,7 +22,6 @@ namespace Tam.Domain.Entities
         public string Status { get; set; } = "Pending";
         public string? DownloadUrl { get; set; }
 
-        public DateTime RequestedAt { get; set; } = DateTime.UtcNow;
         public DateTime? CompletedAt { get; set; }
     }
 

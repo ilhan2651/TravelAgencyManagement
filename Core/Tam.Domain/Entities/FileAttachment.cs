@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class FileAttachment
+    public class FileAttachment : BaseEntity
     {
-        public int Id { get; set; }
 
         public string FileName { get; set; } = string.Empty;
         public string FilePath { get; set; } = string.Empty;
@@ -19,6 +19,7 @@ namespace Tam.Domain.Entities
 
         public string EntityName { get; set; } = string.Empty;
         public string EntityId { get; set; } = string.Empty;
+       
     }
 
 }

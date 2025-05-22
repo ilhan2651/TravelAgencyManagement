@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class Language
+    public class Language : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
+        public ICollection<GuideLanguage>? GuideLanguages { get; set; }
+
     }
 }

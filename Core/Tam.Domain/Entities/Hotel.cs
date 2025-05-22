@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class Hotel
+    public class Hotel : BaseEntity
     {
-        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
@@ -18,9 +18,13 @@ namespace Tam.Domain.Entities
         public string Website { get; set; } = string.Empty;
         public int StarRating { get; set; }
         public decimal PricePerNight { get; set; }
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public int? LocationId { get; set; }
+        public Location? Location { get; set; }
         public bool IsActive { get; set; }
 
+        public ICollection<HotelFacility>? HotelFacilities { get; set; }
+        public ICollection<HotelReservation>? HotelReservations { get; set; }
+        public ICollection<HotelPurchase>? HotelPurchases { get; set; }
 
     }
 }

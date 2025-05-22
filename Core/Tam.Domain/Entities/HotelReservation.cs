@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Tam.Domain.Entities
 {
-    internal class HotelReservation
+    public class HotelReservation : Reservation
     {
+        public int HotelId { get; set; }
+        public Hotel Hotel { get; set; }
+        public DateTime CheckIn { get; set; }
+        public DateTime CheckOut { get; set; }
+        public Invoice? Invoice { get; set; }
+        public HotelPurchase? HotelPurchase { get; set; }
+
+
     }
 }

@@ -13,6 +13,8 @@ namespace Tam.Domain.Entities
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-   
+        public ICollection<Tour>? Tours { get; set; }
+        public ICollection<Transfer>? Transfers { get; set; }
+
     }
 }

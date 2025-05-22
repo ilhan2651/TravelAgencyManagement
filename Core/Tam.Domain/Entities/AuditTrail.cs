@@ -13,6 +13,7 @@ namespace Tam.Domain.Entities
         public int EntityId { get; set; }
         public string ActionType { get; set; } = string.Empty;
         public int? UserId { get; set; }
+        public User? User { get; set; }
         public string? Username { get; set; }
 
         public string? OldValues { get; set; }

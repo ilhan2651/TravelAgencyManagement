@@ -14,5 +14,6 @@ namespace Tam.Domain.Entities
         public Location Location { get; set; }
         public string? Note { get; set; }
         public bool IsPrimary { get; set; }
+        
     }
 }

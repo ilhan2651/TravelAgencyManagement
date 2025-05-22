@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class Invoice
+    public class Invoice : BaseEntity
     {
-        public int Id { get; set; }
 
         public string InvoiceNumber { get; set; } = string.Empty;
         public int CustomerId { get; set; }
@@ -22,7 +22,19 @@ namespace Tam.Domain.Entities
         public string Currency { get; set; } = "TRY";
         public string? PdfUrl { get; set; }
 
-        public int PaymentId { get; set; }
+        public int? PaymentId { get; set; }
+        public Payment? Payment { get; set; }
+
+        public int? TourReservationId { get; set; }
+        public TourReservation? TourReservation { get; set; }
+
+        public int? HotelReservationId { get; set; }
+        public HotelReservation? HotelReservation { get; set; }
+
+        public int? TransferReservationId { get; set; }
+        public TransferReservation? TransferReservation { get; set; }
+
+
 
     }
 

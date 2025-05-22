@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Tam.Domain.Entities
 {
-    internal class DriverTransfer
+    public class DriverTransfer
     {
+        public int DriverId { get; set; }
+        public Driver Driver { get; set; }
+        public int TransferId { get; set; }
+        public Transfer Transfer { get; set; }
     }
 }

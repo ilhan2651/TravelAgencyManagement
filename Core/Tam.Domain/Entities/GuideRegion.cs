@@ -9,6 +9,9 @@ namespace Tam.Domain.Entities
     public class GuideRegion
     {
         public int GuideId { get; set; }
+        public Guide Guide { get; set; }
         public int RegionId { get; set; }
+        public Region Region { get; set; }
+
     }
 }
