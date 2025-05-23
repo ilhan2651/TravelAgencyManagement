@@ -16,6 +16,7 @@ namespace Tam.Domain.Entities
         public string Image { get; set; } = string.Empty;
         public ICollection<GuideLocation> GuideLocations { get; set; }
         public ICollection<GuideRegion> GuideRegions { get; set; }
+        public ICollection<Tour> Tours { get; set; }
 
 
     }

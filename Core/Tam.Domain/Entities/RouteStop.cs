@@ -7,7 +7,7 @@ using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class RouteStop : BaseEntity
+    public class RouteStop 
     {
         public int RouteId { get; set; }
         public int LocationId { get; set; }

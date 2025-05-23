@@ -13,9 +13,14 @@ namespace Tam.Domain.Entities
         public decimal Amount { get; set; }
         public bool IsPaid { get; set; }
         public DateTime PaidAt { get; set; }
-        public bool IsRefunded { get; set; }
+        public bool IsRefunded { get; set; } = false;
         public string TransactionCode { get; set; } = string.Empty;
-        public ICollection<Reservation>? Reservations { get; set; }
+        public int? PaymentMethodId { get; set; }
+        public PaymentMethod? PaymentMethod { get; set; }
+
+        public ICollection<HotelReservation>? HotelReservations { get; set; }
+        public ICollection<TourReservation>? TourReservations { get; set; }
+        public ICollection<TransferReservation>? TransferReservations{ get; set; }
 
     }
 }

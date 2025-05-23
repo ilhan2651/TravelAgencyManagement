@@ -10,8 +10,8 @@ namespace Tam.Domain.Entities
     public class ReportRequest : BaseEntity
     {
 
-        public int RequestedByUserId { get; set; }
-        public User RequestedByUser { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
 
         public string ReportType { get; set; } = string.Empty;
 

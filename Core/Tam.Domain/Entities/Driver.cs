@@ -18,6 +18,7 @@ namespace Tam.Domain.Entities
   
         public ICollection<DriverLocation> DriverLocations { get; set; }
         public ICollection<DriverTransfer>? DriverTransfers { get; set; }
+        public ICollection<TourDriver>? TourDrivers{ get; set; }
 
 
 

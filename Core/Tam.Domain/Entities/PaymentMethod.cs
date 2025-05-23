@@ -10,6 +10,8 @@ namespace Tam.Domain.Entities
     public class PaymentMethod : BaseEntity
     {
         public string Method { get; set; } = string.Empty;
+        public ICollection<Payment>? Payments { get; set; }
+
 
     }
 }

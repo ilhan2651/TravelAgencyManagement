@@ -19,9 +19,13 @@ namespace Tam.Domain.Entities
 
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
-        public ICollection<Tour>? Tours { get; set; } 
-        public ICollection<Transfer>? Transfers { get; set; }
-        public ICollection<Hotel>? Hotels { get; set; }
+        public ICollection<DiscountTour>? DiscountTours { get; set; }
+        public ICollection<DiscountHotel>? DiscountHotels { get; set; }
+        public ICollection<DiscountTransfer>? DiscountTransfers { get; set; }
+        public ICollection<TourReservation>? TourReservations { get; set; }
+        public ICollection<TransferReservation>? TransferReservations { get; set; }
+        public ICollection<HotelReservation>? HotelReservations { get; set; }
+
 
 
     }

@@ -12,6 +12,7 @@ namespace Tam.Domain.Entities
 
         public string InvoiceNumber { get; set; } = string.Empty;
         public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
         public DateTime InvoiceDate { get; set; } = DateTime.UtcNow;
 
         public decimal TotalAmount { get; set; }
@@ -19,7 +20,8 @@ namespace Tam.Domain.Entities
         public decimal SubTotal { get; set; }
         public bool IsPaid { get; set; } = false;
 
-        public string Currency { get; set; } = "TRY";
+        public int? CurrencyId { get; set; }
+        public Currency? Currency { get; set; }
         public string? PdfUrl { get; set; }
 
         public int? PaymentId { get; set; }

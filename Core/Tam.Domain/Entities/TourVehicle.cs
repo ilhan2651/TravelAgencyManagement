@@ -8,7 +8,7 @@ namespace Tam.Domain.Entities
 {
     public class TourVehicle
     {
-        public int ToureId { get; set; }
+        public int TourId { get; set; }
         public Tour Tour { get; set; }
         public int VehicleId { get; set; }
         public Vehicle Vehicle { get; set; }

@@ -10,8 +10,13 @@ namespace Tam.Domain.Entities
     {
         public int TourId { get; set; }
         public Tour Tour { get; set; }
+        public int? InvoiceId { get; set; }
         public Invoice? Invoice { get; set; }
-
-
+        public int? DiscountId { get; set; } 
+        public Discount? Discount { get; set; }
+        public int? PaymentId { get; set; }
+        public Payment? Payment { get; set; }
+        public int CustomerId { get; set; }
+        public Customer Customer { get; set; }
     }
 }

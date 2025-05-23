@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class AffiliateTransferSale
+    public class AffiliateTransferSale : BaseEntity
     {
         public int TransferId { get; set; }
         public Transfer Transfer { get; set; }

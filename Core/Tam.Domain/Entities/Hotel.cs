@@ -25,6 +25,9 @@ namespace Tam.Domain.Entities
         public ICollection<HotelFacility>? HotelFacilities { get; set; }
         public ICollection<HotelReservation>? HotelReservations { get; set; }
         public ICollection<HotelPurchase>? HotelPurchases { get; set; }
+        public ICollection<DiscountHotel>? DiscountHotels { get; set; }
+        public ICollection<TourHotel>? TourHotels { get; set; }
+
 
     }
 }

@@ -18,7 +18,7 @@ namespace Tam.Domain.Entities
         public int? SupplierId  { get; set; }
         public Supplier? Supplier { get; set; }
         public ICollection<TourVehicle>? TourVehicles { get; set; }
-        public ICollection<Transfer>? Transfers { get; set; }
+        public ICollection<TransferVehicle>? TransferVehicles { get; set; }
 
 
     }

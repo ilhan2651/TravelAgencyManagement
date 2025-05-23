@@ -27,13 +27,16 @@ namespace Tam.Domain.Entities
         public Location? StartLocation { get; set; }
         public int? EndLocationId { get; set; }
         public Location? EndLocation { get; set; }
-
         public ICollection<TourVehicle>? TourVehicles { get; set; }
         public ICollection<TourDriver>? TourDrivers { get; set; }
         public ICollection<TourRegion>? TourRegions { get; set; }
         public ICollection<TourHotel>? TourHotels { get; set; }
-        public ICollection<TourReservation>? Reservations { get; set; }
+        public ICollection<TourReservation>? TourReservations { get; set; }
         public ICollection<AffiliateTourSale>? AffiliateTourSales { get; set; }
+        public ICollection<DiscountTour>? DiscountTours { get; set; }
+
+
+
 
 
     }

@@ -10,14 +10,12 @@ namespace Tam.Domain.Entities
     public class Reservation : BaseEntity
     {
 
-        public int CustomerId { get; set; }
-        public Customer Customer { get; set; }
+       
         public DateTime ReservationDate { get; set; } = DateTime.UtcNow;
         public int NumberOfPeople { get; set; }
         public int TotalPrice { get; set; }
         public string Status { get; set; }
         public string Note { get; set; } = string.Empty;
-        public int? PaymentId { get; set; }
-        public Payment? Payment { get; set; }
+      
     }
 }
