@@ -1,12 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Tam.Application.Interfaces.Infrastructure;
+using Tam.Application.Interfaces.Repositories;
 using Tam.Persistence.Context;
+using Tam.Persistence.Repositories;
 
 namespace Tam.Persistence
 {
@@ -16,6 +14,11 @@ namespace Tam.Persistence
         {
            services.AddDbContext<TamDbContext>(options=>
            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+            services.AddScoped<IUnitOfWork, >();
+
+
 
             return services;
         }
