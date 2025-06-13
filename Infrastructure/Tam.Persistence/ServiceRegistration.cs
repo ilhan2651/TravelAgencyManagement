@@ -16,7 +16,7 @@ namespace Tam.Persistence
            options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            services.AddScoped<IUnitOfWork, >();
+            services.AddScoped<IUnitOfWork,UnitOfWork >();
 
 
 

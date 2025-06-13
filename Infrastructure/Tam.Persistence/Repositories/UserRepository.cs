@@ -12,10 +12,27 @@ namespace Tam.Persistence.Repositories
 {
     public class UserRepository(TamDbContext context) : GenericRepository<User>(context), IUserRepository
     {
+        public async Task<List<User>> GetActiveUsers()
+        {
+            return await context.Users
+                 .Where(u => u.DeletedAt == null)
+                 .OrderByDescending(u => u.CreatedAt)
+                 .ToListAsync();
+
+        }
+
         public async Task<User?> GetByEmailAsync(string email)
         {
             return await context.Users
                 .FirstOrDefaultAsync(u=>u.Email==email);
+        }
+
+        public async Task<List<User>> GetPassiveUsers()
+        {
+            return await context.Users
+                .Where(u=> u.DeletedAt != null)
+                .OrderByDescending(u => u.DeletedAt)
+                .ToListAsync();
         }
     }
 }

@@ -10,5 +10,8 @@ namespace Tam.Application.Interfaces.Repositories
     public interface IUserRepository : IGenericRepository<User>
     {
         public Task<User?> GetByEmailAsync(string email);
+       
+        public Task<List<User>> GetActiveUsers();
+        public Task<List<User>> GetPassiveUsers();
     }
 }

@@ -1,6 +1,5 @@
-﻿using System.Text.Json.Serialization;
-using System.Net;
-
+﻿using System.Net;
+using System.Text.Json.Serialization;
 
 namespace Tam.Application.Common.Wrappers
 {
@@ -17,16 +16,19 @@ namespace Tam.Application.Common.Wrappers
         [JsonIgnore]
         public bool IsFail => !Success;
 
+        [JsonIgnore]
+        public string Message => string.Join(" ", Messages);
 
         public static ServiceResult Ok(string? message = null, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             return new ServiceResult
             {
                 Success = true,
-                StatusCode = HttpStatusCode.OK,
+                StatusCode = statusCode,
                 Messages = message != null ? [message] : []
             };
         }
+
         public static ServiceResult Created(string urlAsCreated, string? message = null)
         {
             return new ServiceResult
@@ -37,6 +39,7 @@ namespace Tam.Application.Common.Wrappers
                 Messages = message != null ? [message] : []
             };
         }
+
         public static ServiceResult Fail(List<string> errors, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
         {
             return new ServiceResult
@@ -46,6 +49,7 @@ namespace Tam.Application.Common.Wrappers
                 Messages = errors
             };
         }
+
         public static ServiceResult Fail(string error, HttpStatusCode statusCode = HttpStatusCode.BadRequest)
         {
             return Fail(new List<string> { error }, statusCode);
@@ -94,7 +98,4 @@ namespace Tam.Application.Common.Wrappers
             return Fail(new List<string> { error }, status);
         }
     }
-
-
-
 }

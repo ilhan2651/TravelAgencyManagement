@@ -5,12 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Tam.Application.Common.Wrappers;
 using Tam.Application.Dtos.UserDtos;
+using Tam.Domain.Entities;
 
 namespace Tam.Application.Interfaces.Repositories
 {
     public interface IUserService
     {
         Task<ServiceResult> RegisterAsync(RegisterDto register);
-        
+        Task<ServiceResult> LoginAsync(LoginDto login);
+        Task<ServiceResult> SoftDeleteUserAsync(int userId);
+        Task<ServiceResult> UpdateUserAsync(int userId, UpdateUserDto updateUserDto);
+        Task<ServiceResult<UserListDto>> GetUserByIdAsync(int userId);
+        Task<ServiceResult<List<UserListDto>>> GetAllActiveAsync();
+        Task<ServiceResult<List<UserDeletedListDto>>> GetAllDeletedAsync();
+
+
+
     }
 }
