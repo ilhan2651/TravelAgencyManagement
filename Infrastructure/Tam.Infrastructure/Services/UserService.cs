@@ -11,6 +11,7 @@ using Tam.Application.Interfaces.Repositories;
 using Tam.Application.Security;
 using AutoMapper;
 using Tam.Domain.Entities;
+using Tam.Application.Interfaces.Services;
 
 namespace Tam.Application.Services
 {

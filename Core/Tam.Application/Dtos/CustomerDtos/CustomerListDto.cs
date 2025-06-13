@@ -4,17 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tam.Application.Dtos.UserDtos
+namespace Tam.Application.Dtos.CustomerDtos
 {
-    public class UserListDto
+    public class CustomerListDto
     {
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public bool IsDeleted { get; set; }
-        public DateTime CreatedAt { get; set; }
-     
-
+        public string Address { get; set; } = string.Empty;
+        public DateTime DeletedAt { get; set; }
+        public bool IsActive => DeletedAt == null;
     }
 }

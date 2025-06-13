@@ -16,8 +16,4 @@
     <ProjectReference Include="..\..\Core\Tam.Application\Tam.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
-
 </Project>

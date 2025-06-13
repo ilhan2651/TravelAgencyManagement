@@ -7,7 +7,7 @@ using Tam.Application.Common.Wrappers;
 using Tam.Application.Dtos.UserDtos;
 using Tam.Domain.Entities;
 
-namespace Tam.Application.Interfaces.Repositories
+namespace Tam.Application.Interfaces.Services
 {
     public interface IUserService
     {

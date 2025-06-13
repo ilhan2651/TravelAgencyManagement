@@ -14,6 +14,8 @@ namespace Tam.Infrastructure.Mapping
         public UserMapping()
         {
             CreateMap<User,UserListDto>().ReverseMap();
+            CreateMap<User, UserDeletedListDto>().ReverseMap();
+
         }
     }
 }

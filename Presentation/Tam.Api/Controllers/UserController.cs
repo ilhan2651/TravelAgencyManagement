@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tam.Application.Dtos.UserDtos;
-using Tam.Application.Interfaces.Repositories;
+using Tam.Application.Interfaces.Services;
 
 namespace Tam.Api.Controllers
 {

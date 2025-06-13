@@ -27,8 +27,4 @@
     <ProjectReference Include="..\..\Core\Tam.Domain\Tam.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="ServiceRegistration\NewFolder\" />
-  </ItemGroup>
-
 </Project>

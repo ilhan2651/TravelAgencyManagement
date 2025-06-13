@@ -13,6 +13,8 @@ namespace Tam.Domain.Entities
         public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
         public string Address { get; set; } = string.Empty;
+        public bool IsDeleted => DeletedAt.HasValue;
+
         public ICollection<HotelReservation>? HotelReservations { get; set; }
         public ICollection<TourReservation>? TourReservations { get; set; }
         public ICollection<TransferReservation>? TransferReservations { get; set; }
