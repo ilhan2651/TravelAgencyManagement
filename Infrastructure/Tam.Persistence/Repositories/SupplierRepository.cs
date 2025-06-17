@@ -17,7 +17,7 @@ namespace Tam.Persistence.Repositories
             return await context.Suppliers
                 .Include(s=>s.Vehicles)
                 .Include(s=>s.Drivers)
-                .OrderByDescending(x=>x.IsActive)
+                .OrderByDescending(x=>x.DeletedAt==null)
                 .ThenBy(s=>s.Name)
                 .ToListAsync();
         }

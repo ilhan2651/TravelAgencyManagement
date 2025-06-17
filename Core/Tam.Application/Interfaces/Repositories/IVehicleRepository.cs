@@ -3,10 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Entities;
 
 namespace Tam.Application.Interfaces.Repositories
 {
-    internal class IVehicleRepository
+    public interface IVehicleRepository : IGenericRepository<Vehicle>
     {
+        IQueryable<Vehicle> GetAllVehicles();
+        Task<Vehicle?> GetVehicleWithDetails(int id);
+        IQueryable<Vehicle> SearchVehicles(string term);
     }
 }

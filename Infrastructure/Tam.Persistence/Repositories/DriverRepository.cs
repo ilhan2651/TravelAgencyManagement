@@ -17,7 +17,7 @@ namespace Tam.Persistence.Repositories
             return context.Drivers
                   .Include(d => d.Supplier)
                   .Include(d => d.DriverLocations)
-                  .OrderByDescending(d => d.IsActive)
+                  .OrderByDescending(d => d.DeletedAt==null)
                   .ThenBy(d => d.FullName);
                   
         }

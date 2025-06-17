@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tam.Application.Interfaces.Infrastructure;
 using Tam.Application.Interfaces.Repositories;
+using Tam.Application.Interfaces.Services;
 using Tam.Persistence.Context;
 using Tam.Persistence.Repositories;
 
@@ -21,6 +22,8 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IAppranteeRepository, AppranteeRepository>();
             services.AddScoped<ISupplierRepository, SupplierRepository>();
+            services.AddScoped<IDriverRepository, DriverRepository>();
+            services.AddScoped<IVehicleRepository, VehicleRepository>();
 
 
 

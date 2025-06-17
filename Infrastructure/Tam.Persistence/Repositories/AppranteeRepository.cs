@@ -15,14 +15,14 @@ namespace Tam.Persistence.Repositories
         public async Task<List<Apprantee>> GetActiveAppranties()
         {
             return await context.Apprantees
-                .Where(a => a.IsActive==true)
+                .Where(a => a.DeletedAt ==null)
                 .ToListAsync();
         }
 
         public async Task<List<Apprantee>> GetPassiveAppranties()
         {
             return await context.Apprantees
-                .Where(a => a.IsActive == false)
+                .Where(a => a.DeletedAt !=null)
                 .ToListAsync();
         }
     }
