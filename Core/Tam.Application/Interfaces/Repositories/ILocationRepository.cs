@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tam.Domain.Entities;
 
 namespace Tam.Application.Interfaces.Repositories
 {
-    internal interface ILocationRepository
+    public interface ILocationRepository : IGenericRepository<Location>
     {
+        IQueryable<Location> GetLocations();
+        IQueryable<Location> SearchLocations(string term);
     }
 }

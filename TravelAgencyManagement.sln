@@ -11,13 +11,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Prensentation", "Prensentat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tam.Domain", "Core\Tam.Domain\Tam.Domain.csproj", "{B363CCD1-C4BA-4D42-AD72-C86759F18524}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tam.Application", "Core\Tam.Application\Tam.Application.csproj", "{BCAEC961-4D22-47BE-91AE-26B0AE46FD67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tam.Application", "Core\Tam.Application\Tam.Application.csproj", "{BCAEC961-4D22-47BE-91AE-26B0AE46FD67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tam.Persistence", "Infrastructure\Tam.Persistence\Tam.Persistence.csproj", "{47B04EC2-D350-46D0-98B1-553B7B6FDF91}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tam.Persistence", "Infrastructure\Tam.Persistence\Tam.Persistence.csproj", "{47B04EC2-D350-46D0-98B1-553B7B6FDF91}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tam.Infrastructure", "Infrastructure\Tam.Infrastructure\Tam.Infrastructure.csproj", "{89B22768-9814-4835-BD89-1282BC55FF7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tam.Infrastructure", "Infrastructure\Tam.Infrastructure\Tam.Infrastructure.csproj", "{89B22768-9814-4835-BD89-1282BC55FF7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tam.Api", "Presentation\Tam.Api\Tam.Api.csproj", "{495282EC-C55B-447F-A7D1-111F1E3AC175}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tam.Api", "Presentation\Tam.Api\Tam.Api.csproj", "{495282EC-C55B-447F-A7D1-111F1E3AC175}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

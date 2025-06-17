@@ -24,6 +24,9 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<ISupplierRepository, SupplierRepository>();
             services.AddScoped<IDriverRepository, DriverRepository>();
             services.AddScoped<IVehicleRepository, VehicleRepository>();
+            services.AddScoped<ILocationRepository, LocationRepository>();
+            services.AddScoped<IRegionRepository, RegionRepository>();
+            services.AddScoped<ILanguageRepository, LanguageRepository>();
 
 
 

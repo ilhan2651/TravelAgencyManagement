@@ -6,7 +6,13 @@ using System.Threading.Tasks;
 
 namespace Tam.Application.Dtos.LocationDtos
 {
-    internal class ListLocationDto
+    public class LocationListDto
     {
+        public int Id { get; set; }
+        public string? Country { get; set; } = string.Empty;
+        public string City { get; set; } = string.Empty;
+        public string? District { get; set; } = string.Empty;
+        public DateTime? DeletedAt { get; set; }
+        public DateTime? UpdateAt { get; set; }
     }
 }

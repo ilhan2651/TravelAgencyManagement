@@ -20,6 +20,9 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<ISupplierService, SupplierService>();
             services.AddScoped<IDriverService, DriverService>();
             services.AddScoped<IVehicleService, VehicleService>();
+            services.AddScoped<IRegionService, RegionService>();
+            services.AddScoped<ILocationService, LocationService>();
+            services.AddScoped<ILanguageService, LanguageService>();
 
 
 
