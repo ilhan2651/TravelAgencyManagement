@@ -17,6 +17,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICustomerService, CustomerService>();
             services.AddScoped<IAppranteeService, AppranteeService>();
+            services.AddScoped<ISupplierService, SupplierService>();
 
 
 

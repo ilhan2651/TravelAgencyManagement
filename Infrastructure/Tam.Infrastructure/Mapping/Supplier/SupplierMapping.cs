@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Application.Dtos.Supplier;
+using Tam.Application.Dtos.SupplierDtos;
 using Tam.Domain.Entities;
 
 namespace Tam.Infrastructure.Mapping
@@ -16,6 +17,7 @@ namespace Tam.Infrastructure.Mapping
             CreateMap<CreateSupplierDto, Supplier>();   
             CreateMap<UpdateSupplierDto, Supplier>();
             CreateMap<Supplier,SupplierListDto>();
+            CreateMap<Supplier,SupplierSearchResultDto>();
         }
     }
 }

@@ -16,6 +16,7 @@ namespace Tam.Infrastructure.Mapping
             CreateMap<CreateCustomerDto,Customer>();
             CreateMap<UpdateCustomerDto,Customer>();
             CreateMap<Customer,CustomerListDto>();
+            CreateMap<Customer,CustomerSearchResultDto>();
         }
     }
 }

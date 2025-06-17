@@ -27,6 +27,9 @@ namespace Tam.Domain.Entities
         public Location? StartLocation { get; set; }
         public int? EndLocationId { get; set; }
         public Location? EndLocation { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
         public ICollection<TourVehicle>? TourVehicles { get; set; }
         public ICollection<TourDriver>? TourDrivers { get; set; }
         public ICollection<TourRegion>? TourRegions { get; set; }

@@ -13,7 +13,6 @@
   <ItemGroup>
     <Folder Include="Common\Enums\" />
     <Folder Include="Common\Constants\" />
-    <Folder Include="Validators\Supplier\" />
   </ItemGroup>
 
   <ItemGroup>

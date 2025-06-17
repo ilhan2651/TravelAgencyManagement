@@ -10,6 +10,7 @@ using Tam.Application.Common.Wrappers;
 using Tam.Application.Dtos.Common;
 using Tam.Application.Dtos.CustomerDtos;
 using Tam.Application.Dtos.Supplier;
+using Tam.Application.Dtos.SupplierDtos;
 using Tam.Application.Interfaces.Infrastructure;
 using Tam.Application.Interfaces.Repositories;
 using Tam.Application.Interfaces.Services;
@@ -44,7 +45,7 @@ namespace Tam.Infrastructure.Services
 
         public async Task<ServiceResult<SupplierListDto>> GetByIdAsync(int id)
         {
-            var supplier = supplierRepository.GetByIdAsync(id);
+            var supplier =await supplierRepository.GetByIdAsync(id);
             if (supplier == null)
                 return ServiceResult<SupplierListDto>.Fail("Tedarikçi bulunamadı.");
             var result = mapper.Map<SupplierListDto>(supplier);
@@ -52,20 +53,20 @@ namespace Tam.Infrastructure.Services
 
         }
 
-        public async Task<ServiceResult<List<SupplierListDto>>> SearchSupplierAsync(string searchTerm)
+        public async Task<ServiceResult<List<SupplierSearchResultDto>>> SearchSupplierAsync(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
-                return ServiceResult<List<SupplierListDto>>.Fail("Arama terimi boş olamaz.");
+                return ServiceResult<List<SupplierSearchResultDto>>.Fail("Arama terimi boş olamaz.");
             var query = supplierRepository.SearchSuppliers(searchTerm);
             var result = await query
-                   .ProjectTo<SupplierListDto>(mapper.ConfigurationProvider)
+                   .ProjectTo<SupplierSearchResultDto>(mapper.ConfigurationProvider)
                    .ToListAsync();
             return result.Any()
-                  ? ServiceResult<List<SupplierListDto>>.Ok(result)
-                  : ServiceResult<List<SupplierListDto>>.Fail("Eşleşen tedarikçi bulunamadı.");
+                  ? ServiceResult<List<SupplierSearchResultDto>>.Ok(result)
+                  : ServiceResult<List<SupplierSearchResultDto>>.Fail("Eşleşen tedarikçi bulunamadı.");
         }
 
-        public async Task<ServiceResult> SoftDeleteAsync(int id)
+        public async Task<ServiceResult> SoftDeleteSupplierAsync(int id)
         {
             var supplier =await supplierRepository.GetByIdAsync(id);
             if (supplier == null)

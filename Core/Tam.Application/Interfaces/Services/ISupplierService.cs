@@ -8,6 +8,7 @@ using Tam.Application.Dtos.Aprantee;
 using Tam.Application.Dtos.Common;
 using Tam.Application.Dtos.CustomerDtos;
 using Tam.Application.Dtos.Supplier;
+using Tam.Application.Dtos.SupplierDtos;
 
 namespace Tam.Application.Interfaces.Services
 {
@@ -18,7 +19,7 @@ namespace Tam.Application.Interfaces.Services
         Task<ServiceResult> CreateAsync(CreateSupplierDto createSupplierDto);
         Task<ServiceResult> UpdateAsync(int id, UpdateSupplierDto updateSupplierDto);
         Task<ServiceResult> SoftDeleteSupplierAsync(int id);
-        Task<ServiceResult<List<SupplierListDto>>> SearchSupplierAsync(string searchTerm);
+        Task<ServiceResult<List<SupplierSearchResultDto>>> SearchSupplierAsync(string searchTerm);
 
     }
 }

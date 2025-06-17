@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,18 +46,18 @@ namespace Tam.Infrastructure.Services
             return ServiceResult<CustomerListDto>.Ok(result);
         }
 
-        public async Task<ServiceResult<PagedResult<CustomerListDto>>> SearchCustomerAsync(string searchTerm, int page, int pageSize)
+        public async Task<ServiceResult<CustomerSearchResultDto>> SearchCustomerAsync(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
-                return ServiceResult<PagedResult<CustomerListDto>>.Fail("Arama terimi boş olamaz.");
+                return ServiceResult<CustomerSearchResultDto>.Fail("Arama terimi boş olamaz.");
             string term=searchTerm.Trim().ToLower();
-            var query = customerRepository
+            var query =await customerRepository
                 .GetAll()
                 .Where(c =>
                 c.FullName.ToLower().Contains(term) ||
-                c.Email.ToLower().Contains(term));
-            var pagedResult = await query.ProjectToPagedResultAsync<Customer,CustomerListDto>(mapper.ConfigurationProvider,page,pageSize);
-            return ServiceResult<PagedResult<CustomerListDto>>.Ok(pagedResult);
+                c.Email.ToLower().Contains(term)).ToListAsync();
+            var result = mapper .Map<CustomerSearchResultDto>(query);
+            return ServiceResult<CustomerSearchResultDto>.Ok(result);
                 
         }
 

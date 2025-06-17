@@ -17,6 +17,6 @@ namespace Tam.Application.Interfaces.Services
         Task<ServiceResult> UpdateCustomerAsync(int customerId, UpdateCustomerDto updateDto);
         Task<ServiceResult<CustomerListDto>> GetUserByIdAsync(int customerId);
         Task<ServiceResult<PagedResult<CustomerListDto>>> GetAllCustomersAsync(int page, int pageSize);
-        Task<ServiceResult<PagedResult<CustomerListDto>>> SearchCustomerAsync(string searchTerm,int page, int pageSize);  
+        Task<ServiceResult<CustomerSearchResultDto>> SearchCustomerAsync(string searchTerm);  
     }
 }

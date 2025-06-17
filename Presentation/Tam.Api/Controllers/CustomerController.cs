@@ -31,7 +31,7 @@ namespace Tam.Api.Controllers
             [FromQuery] int page=1,
             [FromQuery] int pageSize = 10)
         {
-            var result = await customerService.SearchCustomerAsync(searchTerm,page,pageSize);
+            var result = await customerService.SearchCustomerAsync(searchTerm);
             if (!result.IsSuccess)
                 return BadRequest(new { message = result.Message });
 
