@@ -20,7 +20,7 @@ namespace Tam.Infrastructure.Services
         public async Task<ServiceResult> CreateCustomerAsync(CreateCustomerDto createDto)
         {
             var customer = mapper.Map<Customer>(createDto);
-            customer.CreatedAt = DateTime.Now;
+            customer.CreatedAt = DateTime.UtcNow;
             await customerRepository.AddAsync(customer);
             await unitOfWork.SaveChangesAsync();
             return ServiceResult.Ok("Müşteri Başarı ile Oluşturuldu");

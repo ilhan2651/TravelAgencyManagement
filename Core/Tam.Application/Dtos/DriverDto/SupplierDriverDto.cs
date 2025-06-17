@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tam.Application.Dtos.CustomerDtos
+namespace Tam.Application.Dtos.DriverDto
 {
-    public class CustomerListDto
+    public class SupplierDriverDto
     {
         public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
-        public string Email { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
-        public string Address { get; set; } = string.Empty;
-        public DateTime? DeletedAt { get; set; }
-        public bool IsActive => DeletedAt == null;
+        public string LicenseNumber { get; set; } = string.Empty;
+        public DateTime? LicenseExpiryDate { get; set; }
     }
 }

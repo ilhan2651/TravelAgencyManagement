@@ -22,7 +22,6 @@ namespace Tam.Persistence.Configurations
             builder.Property(x => x.Address).HasMaxLength(300);
             builder.Property(x => x.TaxNumber).HasMaxLength(50);
             builder.Property(x => x.SupplierType).IsRequired().HasMaxLength(100);
-            builder.Property(x => x.IsActive).HasDefaultValue(true);
 
             builder.Property(x => x.CreatedAt)
                    .HasDefaultValueSql("TIMEZONE('UTC', now())"); builder.Property(x => x.UpdatedAt).IsRequired(false);

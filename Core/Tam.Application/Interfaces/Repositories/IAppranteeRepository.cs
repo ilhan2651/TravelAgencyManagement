@@ -7,8 +7,9 @@ using Tam.Domain.Entities;
 
 namespace Tam.Application.Interfaces.Repositories
 {
-    public interface ICustomerRepository : IGenericRepository<Customer>
+    public interface IAppranteeRepository : IGenericRepository<Apprantee>
     {
-          IQueryable<Customer> GetActiveCustomers();
+        public Task<List<Apprantee>> GetActiveAppranties();
+        public Task<List<Apprantee>> GetPassiveAppranties();
     }
 }

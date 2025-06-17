@@ -19,6 +19,7 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IAppranteeRepository, AppranteeRepository>();
 
 
 

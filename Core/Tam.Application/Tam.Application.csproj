@@ -13,14 +13,13 @@
   <ItemGroup>
     <Folder Include="Common\Enums\" />
     <Folder Include="Common\Constants\" />
-    <Folder Include="Interfaces\Services\" />
-    <Folder Include="Services\" />
+    <Folder Include="Validators\Supplier\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="14.0.0" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.5" />
   </ItemGroup>
 

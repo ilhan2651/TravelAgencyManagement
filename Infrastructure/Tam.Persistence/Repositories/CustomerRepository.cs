@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +12,12 @@ namespace Tam.Persistence.Repositories
 {
     public class CustomerRepository(TamDbContext context) : GenericRepository<Customer>(context), ICustomerRepository
     {
+        public  IQueryable<Customer> GetActiveCustomers()
+        {
+            return context.Customers
+                .Where(c => c.DeletedAt == null);
+               
+                
+        }
     }
 }

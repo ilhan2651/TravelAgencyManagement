@@ -16,6 +16,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddAutoMapper(typeof(UserMapping).Assembly);
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ICustomerService, CustomerService>();
+            services.AddScoped<IAppranteeService, AppranteeService>();
 
 
 

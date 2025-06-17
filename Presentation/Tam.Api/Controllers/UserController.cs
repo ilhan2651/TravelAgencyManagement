@@ -42,9 +42,9 @@ namespace Tam.Api.Controllers
             return Ok(new { message = result.Message });
         }
         [HttpPut("update/{id}")]
-        public async Task<IActionResult> Update(int userId,UpdateUserDto updateDto)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updateDto)
         {
-            var result = await userService.UpdateUserAsync(userId, updateDto);
+            var result = await userService.UpdateUserAsync(id, updateDto);
             if (!result.IsSuccess)
                 return BadRequest(new { message = result.Message });
             return Ok(new { message = result.Message });
@@ -66,5 +66,6 @@ namespace Tam.Api.Controllers
                 return NotFound(new { message = result.Message });
             return Ok(result.Data);
         }
+        
     }
 }

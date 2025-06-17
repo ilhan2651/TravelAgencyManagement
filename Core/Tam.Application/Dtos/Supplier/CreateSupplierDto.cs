@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tam.Domain.Common;
 
-namespace Tam.Domain.Entities
+namespace Tam.Application.Dtos.Supplier
 {
-    public class Supplier : BaseEntity
+    public class CreateSupplierDto
     {
-
         public string Name { get; set; } = string.Empty;
         public string ContactPerson { get; set; } = string.Empty;
         public string PhoneNumber { get; set; } = string.Empty;
@@ -17,8 +15,5 @@ namespace Tam.Domain.Entities
         public string Address { get; set; } = string.Empty;
         public string? TaxNumber { get; set; }
         public string SupplierType { get; set; } = string.Empty;
-        public ICollection<Driver>? Drivers { get; set; }
-        public ICollection<Vehicle>? Vehicles { get; set; }
-
     }
 }

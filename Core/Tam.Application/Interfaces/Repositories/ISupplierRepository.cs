@@ -7,8 +7,10 @@ using Tam.Domain.Entities;
 
 namespace Tam.Application.Interfaces.Repositories
 {
-    public interface ICustomerRepository : IGenericRepository<Customer>
+    public interface ISupplierRepository : IGenericRepository<Supplier>
     {
-          IQueryable<Customer> GetActiveCustomers();
+        public Task<List<Supplier>> GetAllSuppliers();
+        public IQueryable<Supplier> SearchSuppliers(string term);
+
     }
 }
