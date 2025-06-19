@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tam.Application.Interfaces.Repositories;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 using Tam.Persistence.Context;
 
 namespace Tam.Persistence.Repositories
@@ -31,10 +32,13 @@ namespace Tam.Persistence.Repositories
         }
         public IQueryable<Vehicle> SearchVehicles(string term)
         {
+            term = term.Trim();
+
             return context.Vehicles.Where(v =>
-                EF.Functions.Like(v.PlateNumber, $"%{term}%") ||
-                v.Brand.Contains(term) ||
-                v.Model.Contains(term));
+                EF.Functions.ILike(PgExtensions.Unaccent(v.PlateNumber), $"%{term}%") ||
+                EF.Functions.ILike(PgExtensions.Unaccent(v.Brand), $"%{term}%") ||
+                EF.Functions.ILike(PgExtensions.Unaccent(v.Model), $"%{term}%"));
         }
+
     }
 }

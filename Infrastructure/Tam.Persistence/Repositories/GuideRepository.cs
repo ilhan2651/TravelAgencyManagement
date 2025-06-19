@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Tam.Application.Interfaces.Repositories;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 using Tam.Persistence.Context;
 
 namespace Tam.Persistence.Repositories
@@ -32,8 +29,13 @@ namespace Tam.Persistence.Repositories
 
         public IQueryable<Guide> SearchGuides(string searchTerm)
         {
-            return context.Guides.Where(v =>
-                EF.Functions.Like(v.FullName, $"%{searchTerm}%"));
+            searchTerm = searchTerm.Trim();
+
+            return context.Guides.Where(g =>
+                EF.Functions.ILike(
+                    PgExtensions.Unaccent(g.FullName),   
+                    $"%{searchTerm}%"));
         }
+
     }
 }

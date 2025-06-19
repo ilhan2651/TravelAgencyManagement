@@ -27,6 +27,7 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<ILocationRepository, LocationRepository>();
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
+            services.AddScoped<IGuideRepository, GuideRepository>();
 
 
 

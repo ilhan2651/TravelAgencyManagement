@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tam.Application.Interfaces.Repositories;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 using Tam.Persistence.Context;
 
 namespace Tam.Persistence.Repositories
@@ -38,10 +39,10 @@ namespace Tam.Persistence.Repositories
 
         public IQueryable<Driver> SearchDrivers(string term)
         {
+            term = term.Trim();
             return context.Drivers
-            .Where(d =>
-                EF.Functions.Like(d.FullName, $"%{term}%") ||
-                d.PhoneNumber.Contains(term));
+                .Where(d =>
+                EF.Functions.ILike(PgExtensions.Unaccent(d.FullName), $"%{term}%"));
         }
     }
 

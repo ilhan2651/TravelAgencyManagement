@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 
 namespace Tam.Persistence.Context
 {
@@ -64,6 +65,12 @@ namespace Tam.Persistence.Context
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TamDbContext).Assembly);
+            modelBuilder
+       .HasDbFunction(typeof(PgExtensions)
+       .GetMethod(nameof(PgExtensions.Unaccent), new[] { typeof(string) }))
+       .HasName("unaccent")          // PostgreSQL fonksiyon adı
+       .IsBuiltIn();                 // Schema belirtmeye gerek yok
+
         }
 
     }

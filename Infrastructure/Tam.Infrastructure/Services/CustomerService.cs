@@ -46,18 +46,18 @@ namespace Tam.Infrastructure.Services
             return ServiceResult<CustomerListDto>.Ok(result);
         }
 
-        public async Task<ServiceResult<CustomerSearchResultDto>> SearchCustomerAsync(string searchTerm)
+        public async Task<ServiceResult<List<CustomerSearchResultDto>>> SearchCustomerAsync(string searchTerm)
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
-                return ServiceResult<CustomerSearchResultDto>.Fail("Arama terimi boş olamaz.");
+                return ServiceResult<List<CustomerSearchResultDto>>.Fail("Arama terimi boş olamaz.");
             string term=searchTerm.Trim().ToLower();
             var query =await customerRepository
                 .GetAll()
                 .Where(c =>
                 c.FullName.ToLower().Contains(term) ||
                 c.Email.ToLower().Contains(term)).ToListAsync();
-            var result = mapper .Map<CustomerSearchResultDto>(query);
-            return ServiceResult<CustomerSearchResultDto>.Ok(result);
+            var result = mapper.Map<List<CustomerSearchResultDto>>(query);
+            return ServiceResult<List<CustomerSearchResultDto>>.Ok(result);
                 
         }
 

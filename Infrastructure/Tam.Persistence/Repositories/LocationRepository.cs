@@ -1,5 +1,7 @@
-﻿using Tam.Application.Interfaces.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using Tam.Application.Interfaces.Repositories;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 using Tam.Persistence.Context;
 
 namespace Tam.Persistence.Repositories
@@ -14,11 +16,13 @@ namespace Tam.Persistence.Repositories
 
         public IQueryable<Location> SearchLocations(string term)
         {
-            term = term.Trim().ToLower();
+            term = term.Trim();
+
             return context.Locations.Where(l =>
-                (l.City.ToLower().Contains(term)) ||
-                (l.Country != null && l.Country.ToLower().Contains(term)) ||
-                (l.District != null && l.District.ToLower().Contains(term)));
+                EF.Functions.ILike(PgExtensions.Unaccent(l.City), $"%{term}%") ||
+                (l.Country != null && EF.Functions.ILike(PgExtensions.Unaccent(l.Country), $"%{term}%")) ||
+                (l.District != null && EF.Functions.ILike(PgExtensions.Unaccent(l.District), $"%{term}%")));
         }
+
     }
 }

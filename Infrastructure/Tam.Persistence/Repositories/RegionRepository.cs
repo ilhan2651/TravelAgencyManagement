@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Tam.Application.Interfaces.Repositories;
 using Tam.Domain.Entities;
+using Tam.Infrastructure.Extensions;
 using Tam.Persistence.Context;
 
 namespace Tam.Persistence.Repositories
@@ -15,8 +16,11 @@ namespace Tam.Persistence.Repositories
 
         public IQueryable<Region> SearchRegions(string term)
         {
-            term = term.Trim().ToLower();
-            return context.Regions.Where(r => r.Name.ToLower().Contains(term));
+            term = term.Trim();
+
+            return context.Regions.Where(r =>
+                EF.Functions.ILike(PgExtensions.Unaccent(r.Name), $"%{term}%"));
         }
+
     }
 }

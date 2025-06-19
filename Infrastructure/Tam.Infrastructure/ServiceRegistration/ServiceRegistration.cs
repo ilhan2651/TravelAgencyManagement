@@ -23,6 +23,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<IRegionService, RegionService>();
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ILanguageService, LanguageService>();
+            services.AddScoped<IGuideService, GuideService>();
 
 
 

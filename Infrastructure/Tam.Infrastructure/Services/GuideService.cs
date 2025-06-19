@@ -58,7 +58,7 @@ namespace Tam.Infrastructure.Services
         {
             if (string.IsNullOrWhiteSpace(searchTerm))
                 return ServiceResult<List<GuideSearchResultDto>>.Fail("Arama terimi boş olamaz.");
-            var result =await  guideRepository.SearchGuides(searchTerm.Trim())
+            var result =await  guideRepository.SearchGuides(searchTerm.Trim().ToLower())
                 .ProjectTo<GuideSearchResultDto>(mapper.ConfigurationProvider)
                 .ToListAsync();
             return result.Any()

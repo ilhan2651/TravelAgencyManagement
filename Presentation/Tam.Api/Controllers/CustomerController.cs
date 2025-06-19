@@ -27,9 +27,7 @@ namespace Tam.Api.Controllers
         }
         [HttpGet("search-customers")]
         public async Task<IActionResult> SearchCustomers(
-            [FromQuery] string searchTerm,
-            [FromQuery] int page=1,
-            [FromQuery] int pageSize = 10)
+            [FromQuery] string searchTerm)
         {
             var result = await customerService.SearchCustomerAsync(searchTerm);
             if (!result.IsSuccess)
