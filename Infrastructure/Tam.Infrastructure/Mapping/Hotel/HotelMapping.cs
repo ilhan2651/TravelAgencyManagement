@@ -19,6 +19,9 @@ namespace Tam.Infrastructure.Mapping
                 .ForMember(d => d.Id, opt => opt.MapFrom(s => s.Facility.Id))
                 .ForMember(d => d.Name, opt => opt.MapFrom(s => s.Facility.Name));
 
+            CreateMap<HotelRoomOption, HotelRoomOptionDto>()
+    .ForMember(d => d.RoomTypeName, opt => opt.MapFrom(s => s.RoomType.Name));
+
             CreateMap<Hotel, ListHotelDto>()
                 .ForMember(d => d.LocationName, opt => opt.MapFrom(s =>
                     s.Location != null
@@ -28,7 +31,8 @@ namespace Tam.Infrastructure.Mapping
 
             CreateMap<Hotel, HotelDetailDto>()
                 .IncludeBase<Hotel, ListHotelDto>()
-                .ForMember(d => d.Facilities, opt => opt.MapFrom(s => s.HotelFacilities));
+                .ForMember(d => d.Facilities, opt => opt.MapFrom(s => s.HotelFacilities))
+                  .ForMember(d => d.RoomOptions, opt => opt.MapFrom(s => s.RoomOptions));
 
             CreateMap<Hotel, HotelSearchResultDto>()
                 .ForMember(d => d.LocationName, opt => opt.MapFrom(s =>

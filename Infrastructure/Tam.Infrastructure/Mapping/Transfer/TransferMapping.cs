@@ -3,7 +3,7 @@ using Tam.Application.Dtos.Transfer;
 using Tam.Domain.Entities;
 using Tam.Domain.Entities.JoinTables;
 
-namespace Tam.Infrastructure.Mapping.Transfer
+namespace Tam.Infrastructure.Mapping
 {
     public class TransferMapping : Profile
     {

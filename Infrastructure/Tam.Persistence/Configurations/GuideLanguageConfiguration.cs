@@ -16,7 +16,7 @@ namespace Tam.Persistence.Configurations
             builder.HasKey(x => new { x.GuideId, x.LanguageId });
 
             builder.HasOne(x => x.Guide)
-                   .WithMany()
+                   .WithMany(g => g.GuideLanguages)
                    .HasForeignKey(x => x.GuideId);
 
             builder.HasOne(x => x.Language)

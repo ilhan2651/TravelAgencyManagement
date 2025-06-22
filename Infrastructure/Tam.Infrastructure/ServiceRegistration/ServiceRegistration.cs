@@ -31,6 +31,8 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<ITransferService, TransferService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IPaymentMethodService, PaymentMethodService>();
+            services.AddScoped<IRoomTypeService, RoomTypeService>();
+            services.AddScoped<IHotelRoomOptionService, HotelRoomOptionService>();
 
 
 

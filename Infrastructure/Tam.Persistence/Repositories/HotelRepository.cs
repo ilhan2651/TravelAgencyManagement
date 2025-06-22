@@ -26,6 +26,8 @@ namespace Tam.Persistence.Repositories
         public async Task<Hotel?> GetHotelWithFacilities(int id)
         {
             return await context.Hotels
+                .Include(h=>h.RoomOptions)
+                    .ThenInclude(h => h.RoomType)
                 .Include(h => h.Location)
                 .Include(h => h.HotelFacilities)
                     .ThenInclude(hf => hf.Facility)

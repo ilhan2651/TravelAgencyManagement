@@ -22,5 +22,7 @@ namespace Tam.Domain.Entities
         public Payment? Payment { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
+        public ICollection<HotelReservationRoomOption> ReservedRooms { get; set; }
+
     }
 }

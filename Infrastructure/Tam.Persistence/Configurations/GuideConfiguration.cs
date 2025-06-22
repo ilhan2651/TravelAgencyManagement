@@ -40,6 +40,11 @@ namespace Tam.Persistence.Configurations
                    .WithOne(gr => gr.Guide)
                    .HasForeignKey(gr => gr.GuideId)
                    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(g => g.GuideLanguages)
+                   .WithOne(gl => gl.Guide)
+                   .HasForeignKey(gl => gl.GuideId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
         }
     }
 

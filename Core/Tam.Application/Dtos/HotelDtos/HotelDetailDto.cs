@@ -14,6 +14,7 @@ namespace Tam.Application.Dtos.HotelDtos
         public string Email { get; set; } = string.Empty;
         public string Website { get; set; } = string.Empty;
         public ICollection<FacilityDtoForHotel> Facilities { get; set; } = [];
+        public ICollection<HotelRoomOptionDto> RoomOptions { get; set; } = []; 
 
     }
 

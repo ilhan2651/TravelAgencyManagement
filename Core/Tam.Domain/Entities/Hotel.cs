@@ -19,6 +19,7 @@ namespace Tam.Domain.Entities
         public Location? Location { get; set; }
         public bool IsActive { get; set; }
 
+        public ICollection<HotelRoomOption> RoomOptions { get; set; }
         public ICollection<HotelFacility> HotelFacilities { get; set; } = new List<HotelFacility>();
         public ICollection<HotelReservation>? HotelReservations { get; set; }
         public ICollection<HotelPurchase>? HotelPurchases { get; set; }
