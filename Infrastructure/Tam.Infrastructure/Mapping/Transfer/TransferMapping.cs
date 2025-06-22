@@ -3,7 +3,7 @@ using Tam.Application.Dtos.Transfer;
 using Tam.Domain.Entities;
 using Tam.Domain.Entities.JoinTables;
 
-namespace Tam.Infrastructure.Mapping
+namespace Tam.Infrastructure.Mapping.Transfer
 {
     public class TransferMapping : Profile
     {
@@ -19,7 +19,11 @@ namespace Tam.Infrastructure.Mapping
                 .ForMember(dest => dest.Route, opt => opt.MapFrom(src => src.Route))
                 .ForMember(dest => dest.Customers, opt => opt.MapFrom(src => src.TransferReservations.Select(tr => tr.Customer)))
                 .ForMember(dest => dest.Drivers, opt => opt.MapFrom(src => src.DriverTransfers.Select(dt => dt.Driver)))
-                .ForMember(dest => dest.Vehicles, opt => opt.MapFrom(src => src.TransferVehicles.Select(tv => tv.Vehicle)));
+                .ForMember(dest => dest.Vehicles, opt => opt.MapFrom(src => src.TransferVehicles.Select(tv => tv.Vehicle)))
+                .ForMember(dest => dest.AppranteName, opt => opt.MapFrom(src => src.Apprantee.FullName))
+                .ForMember(dest => dest.AppranteePhoneNumber, opt => opt.MapFrom(src => src.Apprantee.PhoneNumber));
+
+
 
             CreateMap<Route, TransferRouteDto>();
 

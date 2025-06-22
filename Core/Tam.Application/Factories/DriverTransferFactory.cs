@@ -9,7 +9,7 @@ namespace Tam.Application.Factories
 {
     public static class DriverTransferFactory
     {
-        public static DriverTransfer Create(int driverId, int transferId)
+        public static DriverTransfer Create(int transferId,int driverId)
         {
             return new DriverTransfer
             {

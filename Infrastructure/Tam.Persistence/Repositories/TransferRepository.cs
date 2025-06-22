@@ -26,6 +26,7 @@ namespace Tam.Persistence.Repositories
         public async Task<Transfer?> GetTransferWithDetailsAsync(int id)
         {
             return await context.Transfers
+                .Include(t=>t.Apprantee)
                .Include(t => t.StartLocation)
                .Include(t => t.EndLocation)
                .Include(t => t.Route)

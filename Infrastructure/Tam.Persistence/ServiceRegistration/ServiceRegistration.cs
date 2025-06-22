@@ -33,6 +33,8 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<IFacilityRepository, FacilityRepository>();
             services.AddScoped<IHotelRepository, HotelRepository>();
             services.AddScoped<ITransferRepository, TransferRepository>();
+            services.AddScoped<IPaymentRepository, PaymentRepository>();
+            services.AddScoped<IPaymentMethodRepository, PaymentMethodRepository>();
 
 
 

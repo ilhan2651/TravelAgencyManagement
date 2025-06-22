@@ -34,6 +34,8 @@ namespace Tam.Infrastructure.Services
                 if (!exists)
                 {
                     var entity = DriverTransferFactory.Create(transferId, driverId);
+                    Console.WriteLine($"Eklenecek DriverId: {driverId}");
+
                     transfer.DriverTransfers.Add(entity);
                 }
             }

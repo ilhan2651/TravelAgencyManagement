@@ -29,6 +29,8 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<ITransferService, TransferService>();
+            services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IPaymentMethodService, PaymentMethodService>();
 
 
 
