@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Common;
+using Tam.Domain.Entities.JoinTables;
 
 namespace Tam.Domain.Entities
 {
@@ -20,7 +21,6 @@ namespace Tam.Domain.Entities
 
         public Location? EndLocation { get; set; }
 
-        public bool IsActive { get; set; } = true;
         public ICollection<RouteStop>? RouteStops { get; set; }
         public ICollection<Tour>? Tours { get; set; }
     }

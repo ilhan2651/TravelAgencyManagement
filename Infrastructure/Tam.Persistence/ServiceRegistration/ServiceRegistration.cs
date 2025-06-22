@@ -28,6 +28,11 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<IRegionRepository, RegionRepository>();
             services.AddScoped<ILanguageRepository, LanguageRepository>();
             services.AddScoped<IGuideRepository, GuideRepository>();
+            services.AddScoped<IRouteRepository, RouteRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IFacilityRepository, FacilityRepository>();
+            services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<ITransferRepository, TransferRepository>();
 
 
 

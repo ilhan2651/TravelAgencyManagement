@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Entities;
+using Tam.Domain.Entities.JoinTables;
 using Tam.Infrastructure.Extensions;
 
 namespace Tam.Persistence.Context
@@ -24,6 +25,7 @@ namespace Tam.Persistence.Context
         public DbSet<AuditTrail> AuditTrails { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Category> Categories{ get; set; }
         public DbSet<Discount> Discounts{ get; set; }
         public DbSet<Driver> Drivers{ get; set; }
         public DbSet<DriverLocation> DriverLocations{ get; set; }

@@ -11,8 +11,6 @@ namespace Tam.Persistence.Configurations
 {
 
 
-    namespace Tam.Persistence.Configurations
-    {
         public class HotelConfiguration : IEntityTypeConfiguration<Hotel>
         {
             public void Configure(EntityTypeBuilder<Hotel> builder)
@@ -86,7 +84,7 @@ namespace Tam.Persistence.Configurations
                           .HasForeignKey(th => th.HotelId)
                           .OnDelete(DeleteBehavior.Cascade);
             }
-        }
+        
     }
 
 }

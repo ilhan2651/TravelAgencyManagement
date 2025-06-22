@@ -12,6 +12,8 @@ namespace Tam.Application.Dtos.LocationDtos
         public string? Country { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string? District { get; set; } = string.Empty;
+        public string? Name { get; set; } = string.Empty;
+
         public DateTime? DeletedAt { get; set; }
         public DateTime? UpdateAt { get; set; }
     }

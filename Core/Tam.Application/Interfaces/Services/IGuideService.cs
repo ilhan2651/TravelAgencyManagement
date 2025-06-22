@@ -14,6 +14,13 @@ namespace Tam.Application.Interfaces.Services
 
         Task<ServiceResult<PagedResult<ListGuideDto>>> GetAllAsync(int page, int pageSize);
         Task<ServiceResult<GuideDetailDto>> GetByIdAsync(int id);
+        Task<ServiceResult> AssignRegionsAsync(int guideId, List<int> regionIds);
+        Task<ServiceResult> RemoveRegionsAsync(int guideId, int regionId);
+        Task<ServiceResult> AssignLocationsAsync(int guideId, List<int> locationIds);
+        Task<ServiceResult> RemoveLocationAsync(int guideId, int locationId);
+        Task<ServiceResult> AssignLanguagesAsync(int guideId, List<int> languageIds);
+        Task<ServiceResult> RemoveLanguageAsync(int guideId, int languageId);
+
 
         Task<ServiceResult<List<GuideSearchResultDto>>> SearchAsync(string searchTerm);
     }

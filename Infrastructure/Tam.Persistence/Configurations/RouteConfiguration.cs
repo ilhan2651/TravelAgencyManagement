@@ -14,7 +14,6 @@ namespace Tam.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Route> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.IsActive).IsRequired().HasDefaultValue(true);
             builder.Property(x => x.CreatedAt)
                    .HasDefaultValueSql("TIMEZONE('UTC', now())"); builder.Property(x => x.DeletedAt).IsRequired(false);
             builder.Property(x => x.UpdatedAt).IsRequired(false);

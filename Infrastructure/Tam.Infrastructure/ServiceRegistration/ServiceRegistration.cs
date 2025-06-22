@@ -24,6 +24,11 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<ILocationService, LocationService>();
             services.AddScoped<ILanguageService, LanguageService>();
             services.AddScoped<IGuideService, GuideService>();
+            services.AddScoped<IRouteService, RouteService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IFacilityService, FacilityService>();
+            services.AddScoped<IHotelService, HotelService>();
+            services.AddScoped<ITransferService, TransferService>();
 
 
 

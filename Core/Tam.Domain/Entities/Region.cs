@@ -1,9 +1,10 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Common;
+using Tam.Domain.Entities.JoinTables;
 
 namespace Tam.Domain.Entities
 {

@@ -5,6 +5,7 @@ using Tam.Application.Dtos.Guide;
 using Tam.Application.Dtos.GuideLocation;
 using Tam.Application.Dtos.GuideRegion;
 using Tam.Application.Dtos.Tour;
+using Tam.Domain.Entities.JoinTables;
 
 namespace Tam.Infrastructure.Mapping
 {

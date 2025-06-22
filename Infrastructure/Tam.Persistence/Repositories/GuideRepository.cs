@@ -19,6 +19,7 @@ namespace Tam.Persistence.Repositories
         public async Task<Guide> GetGuideWithDetails(int id)
         {
             return  await context.Guides
+                .Include(g => g.GuideLanguages)
                 .Include(g => g.GuideLocations)
                 .ThenInclude(gl => gl.Location)
                 .Include(g => g.GuideRegions)

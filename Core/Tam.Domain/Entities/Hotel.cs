@@ -1,5 +1,6 @@
 ﻿
 using Tam.Domain.Common;
+using Tam.Domain.Entities.JoinTables;
 
 namespace Tam.Domain.Entities
 {
@@ -18,7 +19,7 @@ namespace Tam.Domain.Entities
         public Location? Location { get; set; }
         public bool IsActive { get; set; }
 
-        public ICollection<HotelFacility>? HotelFacilities { get; set; }
+        public ICollection<HotelFacility> HotelFacilities { get; set; } = new List<HotelFacility>();
         public ICollection<HotelReservation>? HotelReservations { get; set; }
         public ICollection<HotelPurchase>? HotelPurchases { get; set; }
         public ICollection<DiscountHotel>? DiscountHotels { get; set; }

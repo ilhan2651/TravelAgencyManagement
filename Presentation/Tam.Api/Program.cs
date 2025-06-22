@@ -4,6 +4,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Tam.Application.Validators;
 using Tam.Persistence.ServiceRegistration;
+using Tam.Application.Common.Converter;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -20,6 +21,10 @@ builder.Services.AddControllers(options =>
 });
 builder.Services.AddFluentValidationAutoValidation();
 builder.Services.AddValidatorsFromAssemblyContaining<RegisterDtoValidator>();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.Converters.Add(new TimeSpanConverter());
+});
 
 
 

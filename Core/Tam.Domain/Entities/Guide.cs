@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Common;
+using Tam.Domain.Entities.JoinTables;
 namespace Tam.Domain.Entities
 
 {
@@ -17,6 +18,8 @@ namespace Tam.Domain.Entities
         public ICollection<GuideLocation> GuideLocations { get; set; }
         public ICollection<GuideRegion> GuideRegions { get; set; }
         public ICollection<Tour> Tours { get; set; }
+        public ICollection<GuideLanguage> GuideLanguages { get; set; } = new List<GuideLanguage>();
+
 
 
     }

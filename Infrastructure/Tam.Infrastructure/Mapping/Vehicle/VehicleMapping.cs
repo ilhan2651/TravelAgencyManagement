@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Tam.Application.Dtos.VehicleDto;
 using Tam.Application.Dtos.VehicleDtos;
 using Tam.Domain.Entities;
+using Tam.Domain.Entities.JoinTables;
 
 namespace Tam.Infrastructure.Mapping
 {
