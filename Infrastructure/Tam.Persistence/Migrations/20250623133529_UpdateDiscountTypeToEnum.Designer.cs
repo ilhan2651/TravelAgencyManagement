@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Tam.Persistence.Context;
@@ -11,9 +12,11 @@ using Tam.Persistence.Context;
 namespace Tam.Persistence.Migrations
 {
     [DbContext(typeof(TamDbContext))]
-    partial class TamDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250623133529_UpdateDiscountTypeToEnum")]
+    partial class UpdateDiscountTypeToEnum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -851,49 +854,6 @@ namespace Tam.Persistence.Migrations
                     b.HasIndex("PaymentId");
 
                     b.ToTable("HotelReservations");
-                });
-
-            modelBuilder.Entity("Tam.Domain.Entities.HotelReservationGuest", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Age")
-                        .HasColumnType("integer");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("DeletedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<int>("HotelReservationId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("IdentityNumber")
-                        .HasMaxLength(20)
-                        .HasColumnType("character varying(20)");
-
-                    b.Property<string>("Note")
-                        .HasMaxLength(500)
-                        .HasColumnType("character varying(500)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HotelReservationId");
-
-                    b.ToTable("HotelReservationGuests");
                 });
 
             modelBuilder.Entity("Tam.Domain.Entities.HotelReservationRoomOption", b =>
@@ -2328,17 +2288,6 @@ namespace Tam.Persistence.Migrations
                     b.Navigation("Payment");
                 });
 
-            modelBuilder.Entity("Tam.Domain.Entities.HotelReservationGuest", b =>
-                {
-                    b.HasOne("Tam.Domain.Entities.HotelReservation", "HotelReservation")
-                        .WithMany("Guests")
-                        .HasForeignKey("HotelReservationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("HotelReservation");
-                });
-
             modelBuilder.Entity("Tam.Domain.Entities.HotelReservationRoomOption", b =>
                 {
                     b.HasOne("Tam.Domain.Entities.HotelReservation", "HotelReservation")
@@ -3026,8 +2975,6 @@ namespace Tam.Persistence.Migrations
 
             modelBuilder.Entity("Tam.Domain.Entities.HotelReservation", b =>
                 {
-                    b.Navigation("Guests");
-
                     b.Navigation("HotelPurchase");
 
                     b.Navigation("Invoice");

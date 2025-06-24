@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tam.Domain.Common;
 using Tam.Domain.Entities.JoinTables;
+using Tam.Domain.Enums.Tam.Domain.Enums;
 
 namespace Tam.Domain.Entities
 {
@@ -12,7 +13,7 @@ namespace Tam.Domain.Entities
     {
 
         public string Name { get; set; } = string.Empty;
-        public string Type { get; set; } = "Percentage";
+        public DiscountType Type { get; set; } = DiscountType.Percentage;
 
         public decimal Value { get; set; }
         public decimal? MinAmount { get; set; }

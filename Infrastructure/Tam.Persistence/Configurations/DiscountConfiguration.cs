@@ -13,8 +13,10 @@ public class DiscountConfiguration : IEntityTypeConfiguration<Discount>
                .HasMaxLength(100);
 
         builder.Property(x => x.Type)
-               .IsRequired()
-               .HasMaxLength(50);
+        .HasConversion<string>()
+        .IsRequired()
+        .HasMaxLength(50);
+
 
         builder.Property(x => x.Value)
                .HasPrecision(10, 2)
