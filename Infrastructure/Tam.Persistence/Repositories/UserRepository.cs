@@ -34,5 +34,11 @@ namespace Tam.Persistence.Repositories
                 .OrderByDescending(u => u.DeletedAt)
                 .ToListAsync();
         }
+        public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
+        {
+            return await context.Users
+                .FirstOrDefaultAsync(u => u.RefreshToken == refreshToken && u.DeletedAt == null);
+        }
+
     }
 }

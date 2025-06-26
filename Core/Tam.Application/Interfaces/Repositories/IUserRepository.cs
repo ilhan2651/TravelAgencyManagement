@@ -13,5 +13,7 @@ namespace Tam.Application.Interfaces.Repositories
        
         public Task<List<User>> GetActiveUsers();
         public Task<List<User>> GetPassiveUsers();
+        Task<User?> GetByRefreshTokenAsync(string refreshToken);
+
     }
 }
