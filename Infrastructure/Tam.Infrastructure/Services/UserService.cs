@@ -12,10 +12,17 @@ using Tam.Application.Security;
 using AutoMapper;
 using Tam.Domain.Entities;
 using Tam.Application.Interfaces.Services;
+using Tam.Infrastructure.Services;
+using Tam.Application.Dtos.Auth;
 
 namespace Tam.Application.Services
 {
-    public class UserService(IUserRepository userRepository,IPasswordHasher passwordHasher, IUnitOfWork unitOfWork, IMapper mapper) : IUserService
+    public class UserService(IUserRepository userRepository
+        ,IPasswordHasher passwordHasher
+        , IUnitOfWork unitOfWork
+        , IMapper mapper
+        ,ITokenService tokenService
+        , IRoleService roleService) : IUserService
     {
         public async Task<ServiceResult> SoftDeleteUserAsync(int userId)
         {
@@ -48,8 +55,28 @@ namespace Tam.Application.Services
                 return ServiceResult.Fail("Kullanıcı bulunamadı. Lütfen kayıt olun veya bilgilerinizi kontrol edin.");
             if (!passwordHasher.Verify(login.Password, user.PasswordHash))
                 return ServiceResult.Fail("Şifre yanlış. Lütfen tekrar deneyin.");
-            return ServiceResult.Ok("Giriş başarılı.");
-            
+            var result = await roleService.GetUserRolesAsync(user.Id);
+            if (!result.IsSuccess || result.Data is null)
+                return ServiceResult.Fail("Kullanıcının rolleri alınamadı.");
+
+            var roleNames = result.Data.Select(r => r.RoleName).ToList();  
+            var token = tokenService.GenerateJwtToken(user,roleNames);
+            var refreshToken = tokenService.GenerateRefreshToken();
+
+            user.RefreshToken=refreshToken;
+            user.RefreshTokenExpiry=DateTime.UtcNow.AddDays(5);
+            userRepository.Update(user);
+            await unitOfWork.SaveChangesAsync();
+
+            var response = new AuthResponseDto
+            {
+                Token = token,
+                RefreshToken = refreshToken,
+                Expiration = DateTime.UtcNow.AddHours(1),
+                Email = user.Email,
+                Roles = roleNames,
+            };
+            return ServiceResult<AuthResponseDto>.Ok(response,"Giriş Yapıldı");
         }
 
         public async Task<ServiceResult> RegisterAsync(RegisterDto registerDto)

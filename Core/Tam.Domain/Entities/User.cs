@@ -19,6 +19,9 @@ namespace Tam.Domain.Entities
         public bool IsDeleted => DeletedAt.HasValue;
         public DateTime? UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiry { get; set; }
+
 
         public ICollection<UserRole>? UserRoles { get; set; } 
         public ICollection<ActionLog>? ActionLogs { get; set; } 

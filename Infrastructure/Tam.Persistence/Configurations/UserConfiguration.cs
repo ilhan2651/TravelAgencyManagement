@@ -24,6 +24,9 @@ namespace Tam.Persistence.Configurations
                    .HasDefaultValueSql("TIMEZONE('UTC', now())"); builder.Property(x => x.UpdatedAt).IsRequired(false);
             builder.Property(x => x.DeletedAt).IsRequired(false);
 
+            builder.Property(x => x.RefreshToken).HasMaxLength(128).IsRequired(false);
+            builder.Property(x => x.RefreshTokenExpiry).IsRequired(false);
+
 
             builder.HasMany(x => x.UserRoles)
                 .WithOne(x => x.User)
