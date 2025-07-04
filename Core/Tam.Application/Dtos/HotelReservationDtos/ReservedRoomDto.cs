@@ -11,7 +11,6 @@ namespace Tam.Application.Dtos.HotelReservationDtos
     {
         public int HotelRoomOptionId { get; set; }
         public int Quantity { get; set; }
-        public decimal PricePerNight { get; set; }
     }
 
 

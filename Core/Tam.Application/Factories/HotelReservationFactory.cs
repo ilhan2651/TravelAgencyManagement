@@ -7,7 +7,7 @@ namespace Tam.Application.Factories
 {
     public static class HotelReservationFactory
     {
-        public static HotelReservation Create(CreateHotelReservationDto dto, Discount? discount)
+        public static HotelReservation Create(CreateHotelReservationDto dto, List<ReservedRoomDetailDto> reservedRoomDetails, Discount? discount)
         {
             var reservation = new HotelReservation
             {
@@ -35,12 +35,12 @@ namespace Tam.Application.Factories
                 }).ToList()
             };
 
-            reservation.TotalPrice = CalculateTotalPrice(dto.ReservedRooms, discount);
+            reservation.TotalPrice = CalculateTotalPrice(reservedRoomDetails, discount);
 
             return reservation;
         }
 
-        public static void Update(HotelReservation entity, UpdateHotelReservationDto dto, Discount? discount)
+        public static void Update(HotelReservation entity, UpdateHotelReservationDto dto, List<ReservedRoomDetailDto> reservedRoomDetails, Discount? discount)
         {
             entity.HotelId = dto.HotelId;
             entity.CustomerId = dto.CustomerId;
@@ -70,10 +70,10 @@ namespace Tam.Application.Factories
                 Note = x.Note
             }).ToList();
 
-            entity.TotalPrice = CalculateTotalPrice(dto.ReservedRooms, discount);
+            entity.TotalPrice = CalculateTotalPrice(reservedRoomDetails, discount);
         }
 
-        private static int CalculateTotalPrice(List<ReservedRoomDto> reservedRooms, Discount? discount)
+        private static int CalculateTotalPrice(List<ReservedRoomDetailDto> reservedRooms, Discount? discount)
         {
             decimal total = 0;
 
@@ -93,4 +93,5 @@ namespace Tam.Application.Factories
             return (int)Math.Round(total);
         }
     }
+
 }

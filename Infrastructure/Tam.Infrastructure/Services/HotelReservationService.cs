@@ -19,6 +19,8 @@ namespace Tam.Infrastructure.Services
           IHotelReservationRepository hotelReservationRepository,
           IUnitOfWork unitOfWork,
           IMapper mapper,
+          IHotelRoomOptionRepository hotelRoomOptionRepository,
+
           IDiscountRepository discountRepository
            
       ) : IHotelReservationService
@@ -26,10 +28,26 @@ namespace Tam.Infrastructure.Services
         public async Task<ServiceResult> CreateAsync(CreateHotelReservationDto dto)
         {
             var discount = dto.DiscountId.HasValue
-               ? await discountRepository.GetByIdAsync(dto.DiscountId.Value)
-               : null;
+                ? await discountRepository.GetByIdAsync(dto.DiscountId.Value)
+                : null;
 
-            var reservation = HotelReservationFactory.Create(dto, discount);
+            var reservedRoomDetails = new List<ReservedRoomDetailDto>();
+
+            foreach (var room in dto.ReservedRooms)
+            {
+                var roomOption = await hotelRoomOptionRepository.GetByIdAsync(room.HotelRoomOptionId);
+                if (roomOption == null)
+                    return ServiceResult.Fail("Oda seçeneği bulunamadı.");
+
+                reservedRoomDetails.Add(new ReservedRoomDetailDto
+                {
+                    RoomTypeName = roomOption.RoomType.Name,
+                    PricePerNight = roomOption.PricePerNight,
+                    Quantity = room.Quantity
+                });
+            }
+
+            var reservation = HotelReservationFactory.Create(dto, reservedRoomDetails, discount);
 
             await hotelReservationRepository.AddAsync(reservation);
             await unitOfWork.SaveChangesAsync();
@@ -90,7 +108,23 @@ namespace Tam.Infrastructure.Services
                 ? await discountRepository.GetByIdAsync(dto.DiscountId.Value)
                 : null;
 
-            HotelReservationFactory.Update(entity, dto, discount);
+            var reservedRoomDetails = new List<ReservedRoomDetailDto>();
+
+            foreach (var room in dto.ReservedRooms)
+            {
+                var roomOption = await hotelRoomOptionRepository.GetByIdAsync(room.HotelRoomOptionId);
+                if (roomOption == null)
+                    return ServiceResult.Fail("Oda seçeneği bulunamadı.");
+
+                reservedRoomDetails.Add(new ReservedRoomDetailDto
+                {
+                    RoomTypeName = roomOption.RoomType.Name,
+                    PricePerNight = roomOption.PricePerNight,
+                    Quantity = room.Quantity
+                });
+            }
+
+            HotelReservationFactory.Update(entity, dto, reservedRoomDetails, discount);
 
             await unitOfWork.SaveChangesAsync();
             return ServiceResult.Ok("Rezervasyon başarıyla güncellendi.");

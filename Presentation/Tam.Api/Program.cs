@@ -6,6 +6,9 @@ using Tam.Application.Validators;
 using Tam.Persistence.ServiceRegistration;
 using Tam.Application.Common.Converter;
 using Tam.Infrastructure.Extensions;
+using Tam.Infrastructure.Configuration;
+using Tam.Application.Interfaces.Infrastructure;
+using Tam.Infrastructure.Services.Messaging;
 var builder = WebApplication.CreateBuilder(args);
 
 
@@ -26,6 +29,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 {
     options.JsonSerializerOptions.Converters.Add(new TimeSpanConverter());
 });
+builder.Services.Configure<EmailSettings>(builder.Configuration.GetSection("EmailSettings"));
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMqSettings"));
+builder.Services.AddSingleton<IRabbitMqPublisher, RabbitMqPublisher>();
+builder.Services.AddHostedService<EmailWorker>();
+
 
 
 

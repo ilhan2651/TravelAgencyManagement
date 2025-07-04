@@ -9,14 +9,7 @@ namespace Tam.Api.Controllers
     [ApiController]
     public class UserController(IUserService userService) : ControllerBase
     {
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
-        {
-            var result = await userService.RegisterAsync(registerDto);
-            if (!result.IsSuccess)
-                return BadRequest(new { message = result.Message });
-            return Created("", new { message = result.Message });
-        }
+       
         [HttpGet("get-by-id/{id}")]
         public async Task<IActionResult> GetUserById(int id)
         {
@@ -33,14 +26,7 @@ namespace Tam.Api.Controllers
                 return BadRequest(new { message = result.Message });
             return Ok(new { message = result.Message });
         }
-        [HttpPost("login")]
-        public async Task<IActionResult> Login(LoginDto loginDto)
-        {
-            var result = await userService.LoginAsync(loginDto);
-            if(!result.IsSuccess)
-                return Unauthorized(new { message = result.Message });
-            return Ok(new { message = result.Message });
-        }
+       
         [HttpPut("update/{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateUserDto updateDto)
         {
