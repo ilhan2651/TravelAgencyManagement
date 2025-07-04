@@ -3,96 +3,97 @@ using Microsoft.Extensions.Options;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
-using System.Text;
-using Newtonsoft.Json;
+using System.Text.Json;
 using Tam.Infrastructure.Configuration;
 using Tam.Application.Messages;
 using Tam.Application.Interfaces.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
+using System.Text;
+using Tam.Application.Interfaces.Services;
 
 namespace Tam.Infrastructure.Workers
 {
     public class EmailWorker : BackgroundService
     {
+        private readonly ConnectionFactory _factory;
+        private readonly string _queueName = "email_queue";
         private readonly IServiceProvider _serviceProvider;
-        private readonly RabbitMqSettings _settings;
-        private IConnection? _connection;
-        private IModel? _channel;
 
-        public EmailWorker(IServiceProvider serviceProvider, IOptions<RabbitMqSettings> options)
+        public EmailWorker(IConfiguration configuration, IServiceProvider serviceProvider)
         {
-            _serviceProvider = serviceProvider;
-            _settings = options.Value;
-        }
+            Console.WriteLine("[Worker] Constructor çalıştı.");  // ⬅ Deneme satırı
 
-        public override Task StartAsync(CancellationToken cancellationToken)
-        {
-            var factory = new ConnectionFactory
+            var settings = configuration.GetSection("RabbitMqSettings").Get<RabbitMqSettings>();
+            _factory = new ConnectionFactory
             {
-                HostName = _settings.Host,
-                Port = _settings.Port,
-                UserName = _settings.Username,
-                Password = _settings.Password
+                HostName = settings.Host,
+                Port = settings.Port,
+                UserName = settings.Username,
+                Password = settings.Password
             };
 
-            // *** SENKRON bağlantı ***
-            _connection = factory.CreateConnection("RabbitMqPublisher");
-            _channel = _connection.CreateModel();
+            _serviceProvider = serviceProvider;
+        }
 
-            // Kuyruğu tanımla
-            _channel.QueueDeclare(
-                queue: _settings.EmailQueue,
+        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+        {
+            Console.WriteLine("[Worker] ExecuteAsync başladı...");
+
+            var connection = await _factory.CreateConnectionAsync();
+            var channel = await connection.CreateChannelAsync();
+            Console.WriteLine("[Worker] Bağlantı ve kanal açıldı...");
+
+            await channel.QueueDeclareAsync(
+                queue: _queueName,
                 durable: true,
                 exclusive: false,
-                autoDelete: false,
-                arguments: null);
+                autoDelete: false
+            );
+            Console.WriteLine("[Worker] Kuyruk deklarasyonu yapıldı.");
 
-            // Consumer ayarla
-            var consumer = new EventingBasicConsumer(_channel);
-            consumer.Received += (model, ea) =>
+            var consumer = new AsyncEventingBasicConsumer(channel);
+
+            consumer.ReceivedAsync += async (model, ea) =>
             {
+                Console.WriteLine("[Worker] Mesaj alındı kuyuktan");
+
+                var body = ea.Body.ToArray();
+                var json = Encoding.UTF8.GetString(body);
+                Console.WriteLine($"[Worker] JSON içeriği: {json}");
+
                 try
                 {
-                    var body = ea.Body.ToArray();
-                    var json = Encoding.UTF8.GetString(body);
-                    var message = JsonConvert.DeserializeObject<SendEmailMessage>(json);
-                    if (message == null) return;
+                    
+                    var email = JsonSerializer.Deserialize<SendEmailMessage>(json);
 
+                    // Scoped servisleri bu şekilde kullan
                     using var scope = _serviceProvider.CreateScope();
                     var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
 
-                    // Async metodu senkron olarak tetikliyoruz
-                    emailService
-                        .SendEmailAsync(message.To, message.Subject, message.Body)
-                        .GetAwaiter()
-                        .GetResult();
+                    if (email != null)
+                    {
+                        await emailService.SendEmailAsync(email.To, email.Subject, email.Body);
+                        Console.WriteLine($" Email gönderildi: {email.To}");
+                    }
+
+                    await channel.BasicAckAsync(ea.DeliveryTag, false);
+                    Console.WriteLine("[Worker] Mesaj işleme tamamlandı ve ACK gönderildi.");
+
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"[EmailWorker ERROR]: {ex.Message}");
+                    Console.WriteLine($" Email gönderimi başarısız: {ex.Message}");
                 }
             };
 
-            _channel.BasicConsume(
-                queue: _settings.EmailQueue,
-                autoAck: true,
-                consumer: consumer);
-
-            return base.StartAsync(cancellationToken);
-        }
-
-        protected override Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            // İş zaten StartAsync'te başlıyor, burayı boş bırakabilirsin
-            return Task.CompletedTask;
-        }
-
-        public override Task StopAsync(CancellationToken cancellationToken)
-        {
-            _channel?.Close();
-            _connection?.Close();
-            return base.StopAsync(cancellationToken);
+            await channel.BasicConsumeAsync(
+                queue: _queueName,
+                autoAck: false,
+                consumer: consumer
+            );
         }
     }
+
 }

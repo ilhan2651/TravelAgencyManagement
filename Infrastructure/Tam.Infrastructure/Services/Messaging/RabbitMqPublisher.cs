@@ -1,54 +1,52 @@
 ﻿using System.Text;
 using System.Text.Json;
-using RabbitMQ.Client;
-using Tam.Application.Messages;
-using Tam.Infrastructure.Configuration;
 using Microsoft.Extensions.Options;
+using RabbitMQ.Client;
+using Tam.Application.Interfaces.Infrastructure;
+using Tam.Infrastructure.Configuration;
 
-namespace Tam.Infrastructure.Messaging
+namespace Tam.Infrastructure.Messaging;
+
+public class RabbitMqPublisher : IRabbitMqPublisher
 {
-    public class RabbitMqPublisher
+    private readonly RabbitMqSettings _settings;
+    private readonly ConnectionFactory _factory;
+
+    public RabbitMqPublisher(IOptions<RabbitMqSettings> options)
     {
-        private readonly RabbitMqSettings _settings;
-
-        public RabbitMqPublisher(IOptions<RabbitMqSettings> options)
+        _settings = options.Value;
+        _factory = new ConnectionFactory
         {
-            _settings = options.Value;
-        }
+            HostName = _settings.Host,
+            Port = _settings.Port,
+            UserName = _settings.Username,
+            Password = _settings.Password
+        };
+    }
 
-        public async Task PublishAsync(SendEmailMessage message)
-        {
-            var factory = new ConnectionFactory
-            {
-                HostName = _settings.Host,
-                Port = _settings.Port,
-                UserName = _settings.Username,
-                Password = _settings.Password
-            };
+    public async Task PublishAsync<T>(string queueName, T message)
+    {
+        using var connection = await _factory.CreateConnectionAsync();
+        using var channel = await connection.CreateChannelAsync();
 
-            RabbitMQ.Client.IConnection connection = await factory.CreateConnectionAsync("EmailPublisher");
-            using var channel = connection.CreateModel(); // ❗ Artık hata vermeyecek
+        await channel.QueueDeclareAsync(
+            queue: queueName,
+            durable: true,
+            exclusive: false,
+            autoDelete: false
+        );
 
-            // ✨ Queue tanımı
-            channel.QueueDeclare(
-                queue: _settings.EmailQueue,
-                durable: true,
-                exclusive: false,
-                autoDelete: false,
-                arguments: null
-            );
+        var json = JsonSerializer.Serialize(message);
+        var body = Encoding.UTF8.GetBytes(json);
+        Console.WriteLine($"[Publisher] Mesaj kuyruğa gönderiliyor: {json}");
 
-            // ✉️ Mesajı JSON olarak dönüştür ve byte'a çevir
-            var body = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(message));
 
-            // 🚀 Mesajı gönder
-            channel.BasicPublish(
-                exchange: "",
-                routingKey: _settings.EmailQueue,
-                basicProperties: null,
-                body: body
-            );
-        }
+        await channel.BasicPublishAsync(
+            exchange: "",
+            routingKey: queueName,
+            body: body
+        );
+        Console.WriteLine($"[Publisher] Mesaj başarıyla gönderildi.");
+
     }
 }
-

@@ -8,6 +8,6 @@ namespace Tam.Application.Interfaces.Infrastructure
 {
     public interface IRabbitMqPublisher
     {
-        void Publish<T>(string queueName, T message);
+        public Task PublishAsync<T>(string queueName, T message);
     }
 }

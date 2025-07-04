@@ -8,7 +8,8 @@ using Tam.Application.Common.Converter;
 using Tam.Infrastructure.Extensions;
 using Tam.Infrastructure.Configuration;
 using Tam.Application.Interfaces.Infrastructure;
-using Tam.Infrastructure.Services.Messaging;
+using Tam.Infrastructure.Messaging;
+using Tam.Infrastructure.Workers;
 var builder = WebApplication.CreateBuilder(args);
 
 
