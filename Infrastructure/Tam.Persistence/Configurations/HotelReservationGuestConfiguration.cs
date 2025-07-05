@@ -4,9 +4,9 @@ using Tam.Domain.Entities;
 
 namespace Tam.Persistence.Configurations
 {
-    public class HotelReservationGuestConfiguration : IEntityTypeConfiguration<HotelReservationGuest>
+    public class HotelReservationGuestConfiguration : IEntityTypeConfiguration<TransferReservationGuest>
     {
-        public void Configure(EntityTypeBuilder<HotelReservationGuest> builder)
+        public void Configure(EntityTypeBuilder<TransferReservationGuest> builder)
         {
             builder.HasKey(x => x.Id);
 

@@ -21,6 +21,7 @@ namespace Tam.Domain.Entities
         public Payment? Payment { get; set; }
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
-        
+        public ICollection<TransferReservationGuest> Guests { get; set; } = new List<TransferReservationGuest>();
+
     }
 }

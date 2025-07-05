@@ -20,7 +20,7 @@ namespace Tam.Infrastructure.Services
           IUnitOfWork unitOfWork,
           IMapper mapper,
           IHotelRoomOptionRepository hotelRoomOptionRepository,
-
+          IRabbitMqPublisher rabbitMqPublisher,
           IDiscountRepository discountRepository
            
       ) : IHotelReservationService
@@ -35,7 +35,7 @@ namespace Tam.Infrastructure.Services
 
             foreach (var room in dto.ReservedRooms)
             {
-                var roomOption = await hotelRoomOptionRepository.GetByIdAsync(room.HotelRoomOptionId);
+                var roomOption = await hotelRoomOptionRepository.GetOptionByIdAsync(room.HotelRoomOptionId);
                 if (roomOption == null)
                     return ServiceResult.Fail("Oda seçeneği bulunamadı.");
 
@@ -51,6 +51,11 @@ namespace Tam.Infrastructure.Services
 
             await hotelReservationRepository.AddAsync(reservation);
             await unitOfWork.SaveChangesAsync();
+
+            var fullReservation = await hotelReservationRepository.GetReservationByIdAsync(reservation.Id);
+            var message = ReservationEmailMessageFactory.Create(fullReservation);
+           await rabbitMqPublisher.PublishAsync("reservation-email", message);
+
             return ServiceResult.Ok("Rezervasyon başarıyla oluşturuldu.");
         }
 

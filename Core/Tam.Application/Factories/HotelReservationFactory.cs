@@ -26,7 +26,7 @@ namespace Tam.Application.Factories
                     HotelRoomOptionId = x.HotelRoomOptionId,
                     Quantity = x.Quantity
                 }).ToList(),
-                Guests = dto.Guests.Select(x => new HotelReservationGuest
+                Guests = dto.Guests.Select(x => new TransferReservationGuest
                 {
                     FullName = x.FullName,
                     Age = x.Age,
@@ -62,7 +62,7 @@ namespace Tam.Application.Factories
                 Quantity = x.Quantity
             }).ToList();
 
-            entity.Guests = dto.Guests.Select(x => new HotelReservationGuest
+            entity.Guests = dto.Guests.Select(x => new TransferReservationGuest
             {
                 FullName = x.FullName,
                 Age = x.Age,

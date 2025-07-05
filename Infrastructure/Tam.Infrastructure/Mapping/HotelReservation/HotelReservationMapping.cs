@@ -25,7 +25,7 @@ namespace Tam.Infrastructure.Mapping
     .ForMember(dest => dest.HotelName, opt => opt.MapFrom(src => src.Hotel.Name));
 
 
-            CreateMap<HotelReservationGuestDto, HotelReservationGuest>();
+            CreateMap<HotelReservationGuestDto, TransferReservationGuest>();
 
             CreateMap<HotelReservation, ListHotelReservationDto>()
                 .ForMember(dest => dest.CustomerFullName, opt => opt.MapFrom(src => src.Customer.FullName))
@@ -44,7 +44,7 @@ namespace Tam.Infrastructure.Mapping
                 .ForMember(dest => dest.PricePerNight, opt => opt.MapFrom(src => src.HotelRoomOption.PricePerNight))
                 .ForMember(dest => dest.Quantity, opt => opt.MapFrom(src => src.Quantity));
 
-            CreateMap<HotelReservationGuest, HotelReservationGuestDto>();
+            CreateMap<TransferReservationGuest, HotelReservationGuestDto>();
         }
     }
 }
