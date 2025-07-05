@@ -23,7 +23,7 @@ namespace Tam.Domain.Entities
         public int CustomerId { get; set; }
         public Customer Customer { get; set; }
         public ICollection<HotelReservationRoomOption> ReservedRooms { get; set; }
-        public ICollection<TransferReservationGuest> Guests { get; set; }
+        public ICollection<HotelReservationGuest> Guests { get; set; }
 
 
     }

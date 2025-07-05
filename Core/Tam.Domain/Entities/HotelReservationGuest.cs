@@ -7,10 +7,10 @@ using Tam.Domain.Common;
 
 namespace Tam.Domain.Entities
 {
-    public class TransferReservationGuest : BaseEntity
+    public class HotelReservationGuest : BaseEntity
     {
-        public int TransferReservationId { get; set; }
-        public TransferReservation TransferReservation { get; set; }
+        public int HotelReservationId { get; set; }
+        public HotelReservation HotelReservation { get; set; }
 
         public string FullName { get; set; } = string.Empty;
         public int Age { get; set; }

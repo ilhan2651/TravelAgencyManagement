@@ -3,15 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Tam.Domain.Common;
 
-namespace Tam.Domain.Entities
+namespace Tam.Application.Dtos.TransferReservationDtos
 {
-    public class TransferReservationGuest : BaseEntity
+    public class TransferReservationGuestListDto
     {
-        public int TransferReservationId { get; set; }
-        public TransferReservation TransferReservation { get; set; }
-
+        public int Id { get; set; }
         public string FullName { get; set; } = string.Empty;
         public int Age { get; set; }
         public string? IdentityNumber { get; set; }

@@ -11,6 +11,7 @@ using Tam.Application.Dtos.Email;
 using Tam.Infrastructure.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Tam.Application.Dtos.EmailDtos;
 
 namespace Tam.Infrastructure.Workers
 {
@@ -88,7 +89,7 @@ namespace Tam.Infrastructure.Workers
 
                 try
                 {
-                    var reservationMessage = JsonSerializer.Deserialize<ReservationEmailMessage>(json);
+                    var reservationMessage = JsonSerializer.Deserialize<HotelReservationEmailMessage>(json);
 
                     if (reservationMessage is not null)
                     {
@@ -113,6 +114,45 @@ namespace Tam.Infrastructure.Workers
             };
 
             await channel.BasicConsumeAsync("reservation-email", autoAck: false, reservationConsumer);
+
+
+            await channel.QueueDeclareAsync(
+                queue: "transfer-reservation-email",
+                durable: true,
+                exclusive: false,
+                autoDelete: false
+            );
+            var transferConsumer = new AsyncEventingBasicConsumer(channel);
+            transferConsumer.ReceivedAsync += async (model, ea) =>
+            {
+                var body = ea.Body.ToArray();
+                var json = Encoding.UTF8.GetString(body);
+
+                try
+                {
+                    var transferMessage = JsonSerializer.Deserialize<TransferReservationEmailMessage>(json);
+
+                    if (transferMessage is not null)
+                    {
+                        using var scope = _serviceProvider.CreateScope();
+                        var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
+
+                        var subject = "Transfer Rezervasyon Onayı";
+                        var bodyText = $"Merhaba {transferMessage.CustomerName},\n\n" +
+                                       $"{transferMessage.ReservationDate:dd.MM.yyyy} tarihinde {transferMessage.TransferName} transferi için {transferMessage.NumberOfPeople} kişi olarak rezervasyonunuz oluşturuldu.\n" +
+                                       $"Alış noktası: {transferMessage.PickUpPoint}";
+
+                        await emailService.SendEmailAsync(transferMessage.CustomerEmail, subject, bodyText);
+                        Console.WriteLine($"[Worker] Transfer rezervasyon e-postası gönderildi → {transferMessage.CustomerEmail}");
+                    }
+
+                    await channel.BasicAckAsync(ea.DeliveryTag, false);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"[Worker] Transfer rezervasyon e-postası gönderim hatası: {ex.Message}");
+                }
+            };
         }
     }
 }

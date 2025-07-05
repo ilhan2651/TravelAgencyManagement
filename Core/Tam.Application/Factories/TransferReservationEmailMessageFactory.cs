@@ -4,24 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tam.Application.Dtos.Email;
+using Tam.Application.Dtos.EmailDtos;
 using Tam.Domain.Entities;
 
 namespace Tam.Application.Factories
 {
-    public static class ReservationEmailMessageFactory
+    public static class TransferReservationEmailMessageFactory
     {
-        public static ReservationEmailMessage Create(HotelReservation reservation)
+        public static TransferReservationEmailMessage Create(TransferReservation reservation)
         {
-            return new ReservationEmailMessage
+            return new TransferReservationEmailMessage
             {
                 CustomerEmail = reservation.Customer.Email,
+                TransferName = reservation.Transfer.Name,
                 CustomerName = reservation.Customer.FullName,
-                HotelName = reservation.Hotel.Name,
                 ReservationDate = reservation.ReservationDate,
-                CheckIn = reservation.CheckIn,
-                NumberOfPeople = reservation.NumberOfPeople
+                NumberOfPeople = reservation.NumberOfPeople,
+                PickUpPoint = reservation.PickUpPoint
             };
         }
     }
-
 }

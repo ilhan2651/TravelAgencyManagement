@@ -8,12 +8,11 @@ namespace Tam.Application.Dtos.TransferReservationDtos
 {
     public class ListTransferReservationDto
     {
+        public int Id { get; set; }
         public int NumberOfPeople { get; set; }
+        public string Status { get; set; }
         public int TotalPrice { get; set; }
         public int TransferName { get; set; }
         public int CustomerName { get; set; }
-        public int? DiscountId { get; set; }
-        public int? PaymentId { get; set; }
-        public int? InvoiceId { get; set; }
     }
 }

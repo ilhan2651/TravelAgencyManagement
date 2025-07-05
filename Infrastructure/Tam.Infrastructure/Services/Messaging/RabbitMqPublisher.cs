@@ -38,7 +38,6 @@ public class RabbitMqPublisher : IRabbitMqPublisher
 
         var json = JsonSerializer.Serialize(message);
         var body = Encoding.UTF8.GetBytes(json);
-        Console.WriteLine($"[Publisher] Mesaj kuyruğa gönderiliyor: {json}");
 
 
         await channel.BasicPublishAsync(
@@ -46,7 +45,6 @@ public class RabbitMqPublisher : IRabbitMqPublisher
             routingKey: queueName,
             body: body
         );
-        Console.WriteLine($"[Publisher] Mesaj başarıyla gönderildi.");
 
     }
 }

@@ -9,7 +9,6 @@ namespace Tam.Application.Dtos.TransferReservationDtos
 {
     public class CreateTransferReservationDto
     {
-        public DateTime ReservationDate { get; set; } = DateTime.UtcNow;
         public int NumberOfPeople { get; set; }
         public int TotalPrice { get; set; }
         public string Status { get; set; } = string.Empty;
@@ -21,6 +20,8 @@ namespace Tam.Application.Dtos.TransferReservationDtos
         public int? DiscountId { get; set; }
         public int? PaymentId { get; set; }
         public int? InvoiceId { get; set; }
+        public List<CreateTransferReservationGuestsDto> Guests { get; set; } = [];
+
     }
 
 }

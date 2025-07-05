@@ -53,7 +53,7 @@ namespace Tam.Infrastructure.Services
             await unitOfWork.SaveChangesAsync();
 
             var fullReservation = await hotelReservationRepository.GetReservationByIdAsync(reservation.Id);
-            var message = ReservationEmailMessageFactory.Create(fullReservation);
+            var message = HotelReservationEmailMessageFactory.Create(fullReservation);
            await rabbitMqPublisher.PublishAsync("reservation-email", message);
 
             return ServiceResult.Ok("Rezervasyon başarıyla oluşturuldu.");
