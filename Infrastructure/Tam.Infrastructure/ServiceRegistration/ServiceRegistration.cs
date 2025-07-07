@@ -39,6 +39,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITransferReservationService, TransferReservationService>();
+            services.AddScoped<ITourService, TourService>();
 
 
 
