@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Tam.Application.Common.Wrappers;
+using Tam.Application.Dtos.CommonDtos;
 using Tam.Application.Dtos.Transfer;
 using Tam.Application.Interfaces.Services;
 

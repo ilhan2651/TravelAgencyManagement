@@ -19,5 +19,7 @@ namespace Tam.Application.Dtos.TransferReservationDtos
         public int? DiscountId { get; set; }
         public int? PaymentId { get; set; }
         public int? InvoiceId { get; set; }
+        public List<UpdateTransferReservationGuestDto>? Guests { get; set; } 
+
     }
 }

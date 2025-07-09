@@ -38,12 +38,12 @@ namespace Tam.Infrastructure.Services
 
         public async Task<ServiceResult> UpdateAsync(int id, UpdateTransferReservationDto dto)
         {
-            var entity = await transferReservationRepository.GetByIdAsync(id);
+            var entity = await transferReservationRepository.GetReservationWithDetailsAsync(id);
             if (entity == null)
                 return ServiceResult.Fail("Rezervasyon bulunamadı.");
 
-            mapper.Map(dto, entity);
-            entity.UpdatedAt = DateTime.UtcNow;
+            TransferReservationFactory.Update(entity, dto);
+
 
             await unitOfWork.SaveChangesAsync();
             return ServiceResult.Ok("Rezervasyon başarıyla güncellendi.");

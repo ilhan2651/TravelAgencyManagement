@@ -9,7 +9,7 @@ namespace Tam.Application.Dtos.TransferReservationDtos
 {
     public class TransferReservationDetailDto
     {
-        public int TransferName { get; set; }
+        public string TransferName { get; set; }
         public string PickUpPoint { get; set; } = string.Empty;
         public string DropOffPoint { get; set; } = string.Empty;
 

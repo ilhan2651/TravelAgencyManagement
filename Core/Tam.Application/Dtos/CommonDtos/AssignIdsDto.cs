@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tam.Application.Dtos.Transfer
+namespace Tam.Application.Dtos.CommonDtos
 {
     public class AssignIdsDto
     {
         public List<int> Ids { get; set; } = [];
     }
-
 }

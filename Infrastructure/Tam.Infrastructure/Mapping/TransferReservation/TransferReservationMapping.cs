@@ -33,8 +33,11 @@ namespace Tam.Infrastructure.Mapping
 
             CreateMap<TransferReservation, TransferReservationSearchResultDto>()
                    .ForMember(dest => dest.CustomerName, opt => opt.MapFrom(src => src.Customer.FullName));
+            CreateMap<TransferReservation, ListTransferReservationDto>()
+               .ForMember(d => d.TransferName, o => o.MapFrom(s => s.Transfer.Name))
+               .ForMember(d => d.CustomerName, o => o.MapFrom(s => s.Customer.FullName));
 
         }
     }
-    
+
 }

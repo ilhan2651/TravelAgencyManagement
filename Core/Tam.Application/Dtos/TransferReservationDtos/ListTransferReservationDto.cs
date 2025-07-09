@@ -12,7 +12,7 @@ namespace Tam.Application.Dtos.TransferReservationDtos
         public int NumberOfPeople { get; set; }
         public string Status { get; set; }
         public int TotalPrice { get; set; }
-        public int TransferName { get; set; }
-        public int CustomerName { get; set; }
+        public string TransferName { get; set; }=string.Empty;
+        public string CustomerName { get; set; } = string.Empty;
     }
 }
