@@ -40,6 +40,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<ITransferReservationService, TransferReservationService>();
             services.AddScoped<ITourService, TourService>();
+            services.AddScoped<ITourReservationService, TourReservationService>();
 
 
 

@@ -1,27 +1,30 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using Tam.Application.Dtos.TransferReservationDtos;
+using System.Text;
+using System.Threading.Tasks;
+using Tam.Application.Dtos.TourReservationDtos;
 using Tam.Domain.Entities;
 
 namespace Tam.Application.Factories
 {
-    public static class TransferReservationFactory
+    public static class TourReservationFactory
     {
-        public static void Update(TransferReservation entity, UpdateTransferReservationDto dto)
+        public static void Update(TourReservation entity, UpdateTourReservationDto dto)
         {
             // Ana alanları güncelle
-            entity.TransferId = dto.TransferId;
-            entity.PickUpPoint = dto.PickUpPoint;
-            entity.DropOffPoint = dto.DropOffPoint;
-            entity.InvoiceId = dto.InvoiceId;
-            entity.DiscountId = dto.DiscountId;
-            entity.PaymentId = dto.PaymentId;
+            entity.TourId = dto.TourId;
+            entity.ReservationDate = dto.ReservationDate;
             entity.CustomerId = dto.CustomerId;
             entity.NumberOfPeople = dto.NumberOfPeople;
             entity.TotalPrice = dto.TotalPrice;
             entity.Status = dto.Status;
             entity.Note = dto.Note;
             entity.UpdatedAt = DateTime.UtcNow;
+            entity.InvoiceId = dto.InvoiceId;
+            entity.DiscountId = dto.DiscountId;
+            entity.PaymentId = dto.PaymentId;
+
 
             // Misafirleri güncelleme mantığı
             if (dto.Guests != null)
@@ -50,9 +53,9 @@ namespace Tam.Application.Factories
                 var toAdd = dto.Guests.Where(dg => !dg.Id.HasValue);
                 foreach (var dg in toAdd)
                 {
-                    entity.Guests.Add(new TransferReservationGuest
+                    entity.Guests.Add(new TourReservationGuest
                     {
-                        TransferReservationId = entity.Id,
+                        TourReservationId = entity.Id,
                         FullName = dg.FullName,
                         Age = dg.Age,
                         IdentityNumber = dg.IdentityNumber,

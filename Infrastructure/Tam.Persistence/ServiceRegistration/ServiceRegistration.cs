@@ -43,6 +43,7 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<ITransferReservationRepository, TransferReservationRepository>();
             services.AddScoped<ITourRepository, TourRepository>();
+            services.AddScoped<ITourReservationRepository, TourReservationRepository>();
             return services;
         }
     }

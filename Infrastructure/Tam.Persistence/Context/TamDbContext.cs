@@ -68,6 +68,7 @@ namespace Tam.Persistence.Context
         public DbSet<RoomType> RoomTypes{ get; set; }
         public DbSet<TransferReservationGuest> transferReservationGuests{ get; set; }
         public DbSet<HotelReservationGuest> HotelReservationGuests{ get; set; }
+        public DbSet<TourReservationGuest> TourReservationGuests{ get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
