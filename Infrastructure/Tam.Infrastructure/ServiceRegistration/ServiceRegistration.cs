@@ -41,6 +41,7 @@ namespace Tam.Infrastructure.ServiceRegistration
             services.AddScoped<ITransferReservationService, TransferReservationService>();
             services.AddScoped<ITourService, TourService>();
             services.AddScoped<ITourReservationService, TourReservationService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
 
 
 

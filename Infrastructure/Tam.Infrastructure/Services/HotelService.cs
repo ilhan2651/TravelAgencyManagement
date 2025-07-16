@@ -36,7 +36,7 @@ namespace Tam.Infrastructure.Services
 
         public async Task<ServiceResult<PagedResult<ListHotelDto>>> GetAllAsync(int page, int pageSize)
         {
-            var query = hotelRepository.GetAllHotels();
+            var query =  hotelRepository.GetAllHotels();
 
             if (!query.Any())
                 return ServiceResult<PagedResult<ListHotelDto>>.Fail("Hiçbir otel bulunamadı.");

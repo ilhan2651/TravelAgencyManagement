@@ -44,6 +44,7 @@ namespace Tam.Persistence.ServiceRegistration
             services.AddScoped<ITransferReservationRepository, TransferReservationRepository>();
             services.AddScoped<ITourRepository, TourRepository>();
             services.AddScoped<ITourReservationRepository, TourReservationRepository>();
+            services.AddScoped<IInvoiceRepository, InvoiceRepository>();
             return services;
         }
     }
